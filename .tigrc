@@ -1,0 +1,5 @@
+bind main R !?git rebase -i %(commit)
+bind main U ?@git commit --fixup=%(commit)
+bind status D ?@rm %(file)
+# 行の折り返しを行う
+set wrap-lines = yes
