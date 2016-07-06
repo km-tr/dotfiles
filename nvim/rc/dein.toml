@@ -5,35 +5,13 @@ repo = 'Shougo/dein.vim'
 # git clone 後、実行すべきコマンドがある場合はこんな感じ
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
-
-  [plugins.build]
-  windows = 'tools\\update-dll-mingw'
-  cygwin  = 'make -f make_cygwin.mak'
-  mac     = 'make -f make_mac.mak'
-  linux   = 'make'
-  unix    = 'gmake'
+build = 'make'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 
-# 依存関係を指定したいとき
-[[plugins]]
-repo    = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes']
-
-# 依存関係を指定したからと言って、自動でインストールはされない（ここは NeoBundle と違う）
-[[plugins]]
-repo = 'vim-airline/vim-airline-themes'
-
-[[plugins]]
-repo = 'delphinus35/vim-colors-solarized'
-rev  = 'for-hydrozen-fork'
-
 [[plugins]]
 repo = 'cespare/vim-toml'
-
-[[plugins]]
-repo = 'edkolev/tmuxline.vim'
 
 [[plugins]]
 repo   = 'Shougo/unite.vim'

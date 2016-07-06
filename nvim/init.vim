@@ -22,13 +22,17 @@ if dein#load_state(s:dein_dir)
 
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  " call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " 設定終了
   call dein#end()
   call dein#save_state()
 endif
 
+" vimprocだけは最初にインストールしてほしい
+if dein#check_install(['vimproc'])
+  call dein#install(['vimproc'])
+endif
 " もし、未インストールものものがあったらインストール
 if dein#check_install()
   call dein#install()
@@ -36,17 +40,11 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#tabline#enabled = 1
-
 set number
 set laststatus=2
 set clipboard+=unnamedplus
 
-
-syntax on 
-set background=dark
+syntax on
 
 let g:rustc_path = '/usr/local/bin/rustc'
 
