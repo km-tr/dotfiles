@@ -13,3 +13,5 @@ for file in ${ZSH_FILES[@]}
 do
   ln -fs $HOME/.zprezto/runcoms/$file $HOME/.$file
 done
+
+ln -fs $HOME/.dotfiles/nvim $HOME/.config/nvim
