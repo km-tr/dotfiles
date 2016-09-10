@@ -13,3 +13,4 @@ function peco_insert_selected_git_files(){
 
 zle -N peco_insert_selected_git_files
 bindkey "^g^s" peco_insert_selected_git_files
+
