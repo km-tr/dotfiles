@@ -13,3 +13,4 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init - zsh)"
+export POWERLINE=$(pip show powerline-status | grep Location | sed -e "s/^Location: //")
