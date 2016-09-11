@@ -38,8 +38,6 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:python_host_prog = '/Users/bearkm/.anyenv/envs/pyenv/shims/python'
-let g:python_host3_prog = '/Users/bearkm/.anyenv/envs/pyenv/versions/3.5.2/bin/python3.5'
 let g:deoplete#enable_at_startup = 1
 
 set number

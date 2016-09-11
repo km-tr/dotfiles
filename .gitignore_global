@@ -1,0 +1,7 @@
+.idea
+.vscode/
+.atomignore
+.nyc_output
+*.iml
+elm-stuff
+node_modules
