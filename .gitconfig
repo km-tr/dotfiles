@@ -1,0 +1,12 @@
+[user]
+	name = kmtr
+	email = kinisinakuteiiyo@gmail.com
+[core]
+	excludefile = ~/.gitignore_global
+	editor = vim
+[push]
+	default = current
+[rebase]
+	autosquash = true
+[diff]
+	compactionheuristic=true

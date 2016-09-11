@@ -1,11 +1,11 @@
 #!/bin/bash
 
-DOT_FILES=(.bash_profile .tmux.conf .zprezto .tigrc)
+DOT_FILES=(.bash_profile .tmux.conf .zprezto .tigrc .npmrc .gitconfig .gitignore_global)
 for file in ${DOT_FILES[@]}
 do
   dest=$HOME/$file 
   rm -rf $dest
-  ln -s .dotfiles/$file $dest
+  ln -s $HOME/.dotfiles/$file $dest
 done
 
 ZSH_FILES=(zlogin zlogout zpreztorc zprofile zshenv zshrc)
