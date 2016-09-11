@@ -14,4 +14,9 @@ do
   ln -fs $HOME/.zprezto/runcoms/$file $HOME/.$file
 done
 
-ln -fs $HOME/.dotfiles/nvim $HOME/.config/nvim
+DOTCONFIG_FILES=(nvim powerline)
+
+for file in ${DOTCONFIG_FILES[@]}
+do
+  ln -fs $HOME/.dotfiles/$file $HOME/.config/$file
+done
