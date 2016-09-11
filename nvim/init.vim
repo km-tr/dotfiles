@@ -46,6 +46,11 @@ set clipboard+=unnamedplus
 
 syntax on
 
+" インデント
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 let g:rustc_path = '/usr/local/bin/rustc'
 
 let g:rustfmt_autosave = 1

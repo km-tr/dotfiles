@@ -1,22 +1,25 @@
 #!/bin/bash
 
 DOT_FILES=(.bash_profile .tmux.conf .zprezto .tigrc)
-
 for file in ${DOT_FILES[@]}
 do
-  ln -fs $HOME/.dotfiles/$file $HOME/$file
+  dest=$HOME/$file 
+  rm -rf $dest
+  ln -s .dotfiles/$file $dest
 done
 
 ZSH_FILES=(zlogin zlogout zpreztorc zprofile zshenv zshrc)
-
 for file in ${ZSH_FILES[@]}
 do
-  ln -fs $HOME/.zprezto/runcoms/$file $HOME/.$file
+ dest=$HOME/.$file 
+ rm -rf $dest
+ ln -s $HOME/.zprezto/runcoms/$file $dest 
 done
 
 DOTCONFIG_FILES=(nvim powerline)
-
 for file in ${DOTCONFIG_FILES[@]}
 do
-  ln -fs $HOME/.dotfiles/$file $HOME/.config/$file
+ dest=$HOME/.config/$file
+ rm -rf $dest
+ ln -s $HOME/.dotfiles/$file $dest
 done
