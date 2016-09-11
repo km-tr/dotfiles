@@ -16,7 +16,7 @@ do
  ln -s $HOME/.zprezto/runcoms/$file $dest 
 done
 
-DOTCONFIG_FILES=(nvim powerline)
+DOTCONFIG_FILES=(nvim powerline fish/config.fish fish/fishfile)
 for file in ${DOTCONFIG_FILES[@]}
 do
  dest=$HOME/.config/$file
