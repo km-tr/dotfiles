@@ -13,6 +13,8 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.anyenv/bin:$PATH"
 export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/.yarn/bin"
+export EMOJI_CLI_KEYBIND="^x^e"
 eval "$(anyenv init - zsh)"
 export POWERLINE=$(pip show powerline-status | grep Location | sed -e "s/^Location: //")
 [ -e $HOME/.dotfiles/zprivate ] && source $HOME/.dotfiles/zprivate 

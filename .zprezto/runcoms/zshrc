@@ -15,5 +15,11 @@ if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
 
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "b4b4r07/emoji-cli"
+zplug load 
+
 source $HOME/.dotfiles/.zalias
 source $HOME/.dotfiles/.zfunctions
