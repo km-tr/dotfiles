@@ -5,3 +5,4 @@
 *.iml
 elm-stuff
 node_modules
+yarn.lock
