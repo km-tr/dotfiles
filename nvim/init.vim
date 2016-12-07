@@ -38,13 +38,11 @@ if dein#check_install()
   call dein#install()
 endif
 
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 set number
 set laststatus=2
 set clipboard+=unnamedplus
-
-syntax on
 
 " インデント
 set tabstop=2

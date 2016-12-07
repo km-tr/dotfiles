@@ -15,6 +15,7 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
+export XDG_CONFIG_HOME="$HOME/.config"
 export EMOJI_CLI_KEYBIND="^x^f"
 eval "$(anyenv init - zsh)"
 [ -e $HOME/.dotfiles/zprivate ] && source $HOME/.dotfiles/zprivate 
