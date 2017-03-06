@@ -12,5 +12,13 @@ function peco_insert_selected_git_files(){
 }
 
 zle -N peco_insert_selected_git_files
-bindkey "^g^s" peco_insert_selected_git_files
+bindkey "^x^s" peco_insert_selected_git_files
 
+
+function peco_git_branches() {
+    local res=$(git branch -a | sed 's/^\*/ /' | awk '{ print $1 }' | peco)
+    BUFFER+=$res
+    zle clear-screen
+}
+zle -N peco_git_branches
+bindkey '^x^r' peco_git_branches

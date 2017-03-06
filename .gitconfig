@@ -1,6 +1,6 @@
 [user]
-	name = kmtr
-	email = kinisinakuteiiyo@gmail.com
+	name = km-tr
+	email = kumagai@bear.tokyo
 [core]
 	excludesFile = ~/.gitignore_global
 	editor = nvim
@@ -22,3 +22,5 @@
 	newHighlight = green bold 22
 [include]
   path = .gitconfig.local
+[fetch]
+	prune = true
