@@ -9,15 +9,3 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.anyenv/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$HOME/.yarn/bin"
-export PATH="$HOME/others/flutter/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config"
-export EMOJI_CLI_KEYBIND="^x^f"
-eval "$(anyenv init - zsh)"
-[ -e $HOME/.dotfiles/zprivate ] && source $HOME/.dotfiles/zprivate 
