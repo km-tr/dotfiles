@@ -40,6 +40,7 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
+
 syntax on
 set number
 set laststatus=2

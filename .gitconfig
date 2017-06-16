@@ -20,7 +20,7 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[include]
-  path = .gitconfig.local
 [fetch]
 	prune = true
+[includeIf "gitdir:~/dev/"]
+  path = ~/.gitconfig.local
