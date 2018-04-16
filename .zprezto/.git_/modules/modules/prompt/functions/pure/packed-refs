@@ -1,5 +1,4 @@
-# pack-refs with: peeled fully-peeled 
-79fce767ec638192ec8ec9ec45f769d97549656c refs/remotes/origin/compare-preprompt-path
+# pack-refs with: peeled fully-peeled sorted 
 7d96270704e0dfa1162e33398176bb6b792d615c refs/remotes/origin/master
 93e6c95990caccab65b90fb406d4ab93646131db refs/tags/0.2.0
 46ad34b6b593c2f3d2f31f7e16806b158917dc62 refs/tags/1.0.0
