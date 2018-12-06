@@ -1,22 +1,14 @@
 #!/bin/bash
 
-DOT_FILES=(.bash_profile .tmux.conf .zprezto .tigrc .npmrc .gitconfig .gitignore_global)
+DOT_FILES=(.tmux.conf .tigrc .npmrc .gitconfig .gitignore_global)
 for file in ${DOT_FILES[@]}
 do
-  dest=$HOME/$file 
+  dest=$HOME/$file
   rm -rf $dest
   ln -s $HOME/.dotfiles/$file $dest
 done
 
-ZSH_FILES=(zlogin zlogout zpreztorc zprofile zshenv zshrc)
-for file in ${ZSH_FILES[@]}
-do
- dest=$HOME/.$file 
- rm -rf $dest
- ln -s $HOME/.zprezto/runcoms/$file $dest 
-done
-
-DOTCONFIG_FILES=(nvim powerline fish/config.fish fish/fishfile)
+DOTCONFIG_FILES=(fish/config.fish fish/fishfile)
 for file in ${DOTCONFIG_FILES[@]}
 do
  dest=$HOME/.config/$file
