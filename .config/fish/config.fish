@@ -3,6 +3,7 @@ set -g theme_color_scheme dracula
 set -g theme_display_git_untracked yes
 set -g theme_display_date no
 set -g theme_nerd_fonts yes
+set -g theme_project_dir_length 1
 
 # alias
 ## git
@@ -273,3 +274,9 @@ alias dc 'docker-compose'
 
 ## peco
 alias pco 'git branch | peco | xargs git checkout'
+
+# env
+set -x PATH $HOME/.anyenv/bin $PATH
+set -x NDENV_ROOT $HOME/.anyenv/envs/ndenv
+set -x PATH $NDENV_ROOT/bin $PATH
+set -x PATH $NDENV_ROOT/shims $PATH
