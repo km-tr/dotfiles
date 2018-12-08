@@ -275,11 +275,8 @@ alias dc 'docker-compose'
 ## peco
 alias pco 'git branch | peco | xargs git checkout'
 
-# env
-set -x PATH $HOME/.anyenv/bin $PATH
-set -x NDENV_ROOT $HOME/.anyenv/envs/ndenv
-set -x PATH $NDENV_ROOT/bin $PATH
-set -x PATH $NDENV_ROOT/shims $PATH
-
 # direnv
 eval (direnv hook fish)
+
+# nodenv
+status --is-interactive; and source (nodenv init -|psub)
