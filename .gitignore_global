@@ -7,3 +7,4 @@ elm-stuff
 node_modules
 .history/
 .DS_Store
+.envrc
