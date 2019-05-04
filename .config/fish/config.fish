@@ -280,6 +280,7 @@ if status --is-interactive
 end
 
 # direnv
+set -x EDITOR vim
 eval (direnv hook fish)
 
 # nodenv
