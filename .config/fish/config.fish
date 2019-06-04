@@ -284,9 +284,6 @@ end
 set -x EDITOR vim
 eval (direnv hook fish)
 
-# nodenv
-status --is-interactive; and source (nodenv init -|psub)
-
 # rbenv
 status --is-interactive; and source (rbenv init -|psub)
 
