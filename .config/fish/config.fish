@@ -277,6 +277,7 @@ if status --is-interactive
 
   ## peco
   abbr -a pco 'git branch | peco | xargs git checkout'
+  abbr -a psh 'peco_select_history'
 end
 
 # direnv
