@@ -9,3 +9,4 @@ node_modules
 .DS_Store
 .envrc
 webpack.junk.js
+junk.sh
