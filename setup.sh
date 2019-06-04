@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=(.tmux.conf .tigrc .npmrc .gitconfig .gitignore_global .vimrc)
+DOT_FILES=(.tmux.conf .tigrc .npmrc .gitconfig .gitignore_global .vimrc .bashrc)
 for file in ${DOT_FILES[@]}
 do
   target=$HOME/.dotfiles/$file
