@@ -290,5 +290,8 @@ status --is-interactive; and source (nodenv init -|psub)
 # rbenv
 status --is-interactive; and source (rbenv init -|psub)
 
+# pyenv
+status --is-interactive; and pyenv init - | source
+
 # android studio
 set -x ANDROID_HOME $HOME/Library/Android/sdk
