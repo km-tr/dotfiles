@@ -280,18 +280,19 @@ if status --is-interactive
   abbr -a psh 'peco_select_history'
 end
 
-if status --is-login
-  # direnv
-  set -x EDITOR vim
-  eval (direnv hook fish)
+# direnv
+set -x EDITOR vim
+eval (direnv hook fish)
 
-  # rbenv
-  status --is-interactive; and source (rbenv init -|psub)
+# nodenv
+status --is-interactive; and source (nodenv init -|psub)
 
-  # pyenv
-  status --is-interactive; and eval (pyenv init - | source)
+# rbenv
+status --is-interactive; and source (rbenv init -|psub)
 
-  # android studio
-  set -x ANDROID_HOME $HOME/Library/Android/sdk
-end
+# pyenv
+status --is-interactive; and eval (pyenv init - | source)
+
+# android studio
+set -x ANDROID_HOME $HOME/Library/Android/sdk
 
