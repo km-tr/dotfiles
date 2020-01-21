@@ -285,10 +285,10 @@ set -x EDITOR vim
 eval (direnv hook fish)
 
 # nodenv
-status --is-interactive; and source (nodenv init -|psub)
+status --is-interactive; and source (nodenv init - | source)
 
 # rbenv
-status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive; and source (rbenv init - | source)
 
 # pyenv
 status --is-interactive; and eval (pyenv init - | source)
@@ -296,3 +296,4 @@ status --is-interactive; and eval (pyenv init - | source)
 # android studio
 set -x ANDROID_HOME $HOME/Library/Android/sdk
 
+fix_path
