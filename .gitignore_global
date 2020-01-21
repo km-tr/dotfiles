@@ -10,3 +10,4 @@ node_modules
 .envrc
 webpack.junk.js
 junk.sh
+.favorites.json
