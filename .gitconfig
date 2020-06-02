@@ -23,7 +23,7 @@
 	newHighlight = green bold 22
 [fetch]
 	prune = true
-[includeIf "gitdir:~/dev/"]
+[includeIf "gitdir:~/hoge/"]
   path = ~/.gitconfig.local
 [color "diff"]
 	meta = 227

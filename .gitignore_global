@@ -11,3 +11,7 @@ node_modules
 webpack.junk.js
 junk.sh
 .favorites.json
+BuildConfig.java
+Manifest.java
+R.java
+*.project
