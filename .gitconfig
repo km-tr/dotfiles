@@ -10,6 +10,7 @@
 [rebase]
 	autosquash = true
 	autostash = true
+        instructionFormat = %an %s
 [diff]
   indentHeuristic = true
 [interactive]
@@ -34,5 +35,3 @@
   whitespace = red reverse
 [pull]
 	rebase = true
-[rebase]
-  instructionFormat = %an %s
