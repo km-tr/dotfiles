@@ -6,14 +6,12 @@ if status --is-interactive
   abbr -a nr 'npm run'
   abbr -a ns 'npm start'
   abbr -a nrb 'npm run build'
-  abbr -a nrb 'npm run build'
   abbr -a nrw 'npm run watch'
   abbr -a nrt 'npm run test'
 
   ## yarn
   abbr -a yr 'yarn run'
   abbr -a ys 'yarn start'
-  abbr -a yrb 'yarn run build'
   abbr -a yrb 'yarn run build'
   abbr -a yrw 'yarn run watch'
   abbr -a yrt 'yarn run test'
