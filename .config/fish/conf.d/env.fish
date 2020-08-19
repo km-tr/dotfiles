@@ -8,6 +8,9 @@ if status --is-interactive
   # android studio
   set -x ANDROID_HOME $HOME/Library/Android/sdk
 
+  # zoxide
+  zoxide init fish | source
+
   # PATH
   set PATH $HOME/.rbenv/bin $PATH
   set PATH $HOME/.pyenv/bin $PATH

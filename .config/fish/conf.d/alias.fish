@@ -18,8 +18,4 @@ if status --is-interactive
 
   ## docker
   abbr -a dc 'docker-compose'
-
-  ## peco
-  abbr -a pco 'git branch | peco | xargs git checkout'
-  abbr -a psh 'peco_select_history'
 end
