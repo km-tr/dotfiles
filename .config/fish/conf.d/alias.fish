@@ -18,4 +18,7 @@ if status --is-interactive
 
   ## docker
   abbr -a dc 'docker-compose'
+
+  ## others
+  abbr -a fb 'fish_abbr'
 end
