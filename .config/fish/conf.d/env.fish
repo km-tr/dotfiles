@@ -4,6 +4,7 @@ if status --is-interactive
   # direnv
   eval (direnv hook fish)
   eval (nodenv init - | source)
+  eval (rbenv init - | source)
 
   # android studio
   set -x ANDROID_HOME $HOME/Library/Android/sdk
@@ -12,6 +13,5 @@ if status --is-interactive
   zoxide init fish | source
 
   # PATH
-  set PATH $HOME/.rbenv/bin $PATH
   set PATH $HOME/.pyenv/bin $PATH
 end
