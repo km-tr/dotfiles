@@ -8,3 +8,4 @@ bind status M >tig %(file)
 bind status F !sh -c "git commit --fixup=$(git log -1 --pretty=%H %(file)) -- %(file)"
 # 行の折り返しを行う
 set wrap-lines = yes
+set main-view-author-display = abbreviated
