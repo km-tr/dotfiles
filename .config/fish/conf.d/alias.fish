@@ -19,6 +19,9 @@ if status --is-interactive
   ## docker
   abbr -a dc 'docker-compose'
 
+  ## fzf
+  abbr -a fgco 'git brcnch | fzf | git switch'
+
   ## others
   abbr -a fb 'fish_abbr'
 end
