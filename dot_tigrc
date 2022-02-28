@@ -1,0 +1,11 @@
+bind main R !?git rebase -i %(commit)
+bind main V !?git revert %(commit)
+bind main U !?git commit --fixup=%(commit)
+bind main N !?git cherry-pick -n %(commit)
+bind status D ?@rm %(file)
+bind status L >tig log %(file) 
+bind status M >tig %(file)
+bind status F !sh -c "git commit --fixup=$(git log -1 --pretty=%H %(file)) -- %(file)"
+# 行の折り返しを行う
+set wrap-lines = yes
+set main-view-author-display = abbreviated
