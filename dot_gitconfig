@@ -4,33 +4,15 @@
 [core]
 	excludesFile = ~/.gitignore_global
 	editor = vim
-  pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
 	default = current
 [rebase]
 	autosquash = true
 	autostash = true
-        instructionFormat = %an %s
-[diff]
-  indentHeuristic = true
-[interactive]
-	difffilter = diff-so-fancy
 [color]
-  ui = auto
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+        ui = auto
 [fetch]
 	prune = true
-[color "diff"]
-	meta = 227
-  frag = magenta bold
-  commit = 227 bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
 [pull]
 	rebase = true
 [init]
