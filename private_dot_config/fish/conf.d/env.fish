@@ -12,10 +12,4 @@ if status --is-interactive
   
   # zoxide
   zoxide init fish | source
-
-  # PATH
-  set PATH $HOME/.pyenv/bin $PATH
-
-  # rust
-  
 end
