@@ -4,4 +4,3 @@ init-license=MIT
 init-version=0.1.0
 engine-strict=true
 cache-min=9999999
-//registry.npmjs.org/:_authToken=ed3f8a1c-7900-4a7d-bc5d-5bec2fa30c94
