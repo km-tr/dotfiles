@@ -24,8 +24,6 @@
 	newHighlight = green bold 22
 [fetch]
 	prune = true
-[includeIf "gitdir:~/hoge/"]
-  path = ~/.gitconfig.local
 [color "diff"]
 	meta = 227
   frag = magenta bold
