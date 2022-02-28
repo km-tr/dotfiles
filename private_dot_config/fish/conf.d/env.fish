@@ -1,7 +1,10 @@
 if status --is-interactive
   set -x EDITOR vim
 
-  # direnv
+  # brew
+  eval (/opt/homebrew/bin/brew shellenv)
+
+  # env
   eval (direnv hook fish)
   eval (nodenv init - | source)
   eval (rbenv init - | source)
