@@ -5,5 +5,5 @@ init-version=0.1.0
 engine-strict=true
 cache-min=9999999
 {{ if (eq .chezmoi.hostname "km-work") }}
-//npm.pkg.github.com/:_authToken={{ .github.user  }}
+//npm.pkg.github.com/:_authToken={{ keyring "github" "npm-token" }}
 {{ end }}
