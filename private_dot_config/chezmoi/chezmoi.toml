@@ -1,5 +1,5 @@
 [git]
 autoCommit = true
 [edit]
-args = ["--wait -n"]
+args = ["--wait", "-n"]
 command = "code"
