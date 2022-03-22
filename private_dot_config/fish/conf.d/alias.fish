@@ -23,7 +23,7 @@ if status --is-interactive
   abbr -a fgco 'git branch | fzf | xargs git switch'
 
   ## git commitzen
-  abbr -a gcf -m 'git commit -m \'feat: \''
+  abbr -a gcmf -m 'git commit -m \'feat: \''
 
   ## others
   abbr -a fb 'fish_abbr'
