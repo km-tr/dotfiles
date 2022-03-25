@@ -35,6 +35,8 @@ if status --is-interactive
   abbr -a gcmc 'git commit -m \'chore:'
   abbr -a gcmrv 'git commit -m \'revert:'
 
+  ## chezmoi
+  abbr -a cm 'chezmoi'
 
   ## others
   abbr -a fb 'fish_abbr'
