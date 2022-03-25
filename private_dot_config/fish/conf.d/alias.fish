@@ -17,7 +17,7 @@ if status --is-interactive
   abbr -a yrt 'yarn run test'
 
   ## docker
-  abbr -a dc 'docker-compose'
+  abbr -a dc 'docker compose'
 
   ## fzf
   abbr -a fgco 'git branch | fzf | xargs git switch'
