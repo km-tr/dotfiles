@@ -1,3 +1,8 @@
 {{ if (eq .chezmoi.hostname "km-work") }}
-npmAuthToken: {{ keyring "github" "npm-token" }}
+npmScopes:
+  @micin-jp:
+    npmRegistryServer: 'https://npm.pkg.github.com'
+npmRegistries:
+  //npm.pkg.github.com:
+    npmAuthToken: {{ keyring "github" "npm-token" }}
 {{ end }}
