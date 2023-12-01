@@ -3,7 +3,3 @@ init-author-email=kumagai@bear.tokyo
 init-license=MIT
 init-version=0.1.0
 engine-strict=true
-
-{{ if (eq .chezmoi.hostname "ML000336") }}
-//npm.pkg.github.com/:_authToken={{ keyring "github" "npm-token" }}
-{{ end }}
