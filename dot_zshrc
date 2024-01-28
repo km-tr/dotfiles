@@ -1,15 +1,12 @@
 export EDITOR=vim
 
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f $(brew --prefix)/etc/brew-wrap ];then
   source $(brew --prefix)/etc/brew-wrap
 fi
+
+eval "$(sheldon source)"
 
 eval "$(direnv hook zsh)"
 
