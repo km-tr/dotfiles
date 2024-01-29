@@ -20,3 +20,19 @@ eval "$(zoxide init zsh)"
 
 # aliases
 alias tis='tig status'
+
+alias dc='docker compose'
+
+alias gcmf='git commit -m "feat:"'
+alias gcmfi='git commit -m "fix:"'
+alias gcmd='git commit -m "docs:"'
+alias gcms='git commit -m "style:"'
+alias gcmr='git commit -m "refactor:"'
+alias gcmp='git commit -m "perf:"'
+alias gcmt='git commit -m "test:"'
+alias gcmb='git commit -m "build:"'
+alias gcmci='git commit -m "ci:"'
+alias gcmc='git commit -m "chore:"'
+alias gcmrv='git commit -m "revert:"'
+
+alias cm='chezmoi'
