@@ -1,5 +1,11 @@
+# environment variables
 export EDITOR=vim
 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+path+=($ANDROID_HOME/emulator)
+path+=($ANDROID_HOME/platform-tools)
+
+# eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if [ -f $(brew --prefix)/etc/brew-wrap ];then
@@ -10,8 +16,7 @@ eval "$(sheldon source)"
 
 eval "$(direnv hook zsh)"
 
-export ANDROID_HOME=$HOME/Library/Android/sdk
-path+=($ANDROID_HOME/emulator)
-path+=($ANDROID_HOME/platform-tools)
-
 eval "$(zoxide init zsh)"
+
+# aliases
+alias tis='tig status'
