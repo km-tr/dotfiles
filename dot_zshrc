@@ -8,10 +8,6 @@ path+=($ANDROID_HOME/platform-tools)
 # eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
-fi
-
 eval "$(sheldon source)"
 
 eval "$(direnv hook zsh)"
