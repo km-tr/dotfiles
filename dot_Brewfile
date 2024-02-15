@@ -14,6 +14,7 @@ brew "fzf"
 brew "gh"
 brew "gibo"
 brew "jq"
+brew "mas"
 brew "mise"
 brew "mongosh"
 brew "scrcpy"
@@ -24,7 +25,6 @@ brew "zoxide"
 brew "mongodb/brew/mongodb-community"
 cask "android-platform-tools"
 cask "android-studio"
-cask "bitwarden"
 cask "cursor"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
@@ -37,3 +37,9 @@ cask "raycast"
 cask "rectangle"
 cask "warp"
 cask "zulu17"
+mas "Bitwarden", id: 1352778147
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
