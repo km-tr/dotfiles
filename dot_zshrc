@@ -8,6 +8,9 @@ path+=($ANDROID_HOME/platform-tools)
 export GOPATH=$HOME/go
 path+=($GOPATH/bin)
 
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+path+=($JAVA_HOME/bin)
+
 path+=/opt/homebrew/opt/libpq/bin
 
 # eval
