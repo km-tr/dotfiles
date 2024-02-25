@@ -1,11 +1,14 @@
 [user]
 	name = km-tr
 	email = kumagai@bear.tokyo
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
 [core]
 	excludesFile = ~/.gitignore_global
 	editor = vim
 [push]
 	default = current
+	autosetupremote = true
 [rebase]
 	autosquash = true
 	autostash = true
@@ -17,3 +20,7 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[diff]
+	algorithm = histogram
+[merge]
+	conflictstyle = zdiff3
