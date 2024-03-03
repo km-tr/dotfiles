@@ -1,13 +1,16 @@
 tap "elastic/tap"
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
+tap "homebrew/core"
 tap "homebrew/services"
 tap "mongodb/brew"
 tap "olets/tap"
 brew "aws-sso-util"
 brew "bat"
 brew "chezmoi"
+brew "cocoapods"
 brew "direnv"
 brew "dust"
 brew "fd"
@@ -24,7 +27,7 @@ brew "mecab-ipadic"
 brew "mise"
 brew "mongosh"
 brew "postgresql@14", restart_service: true
-brew "protobuf"
+brew "protobuf@3"
 brew "redis", restart_service: true
 brew "scrcpy"
 brew "sheldon"
@@ -35,7 +38,9 @@ brew "mongodb/brew/mongodb-community"
 cask "android-platform-tools"
 cask "android-studio"
 cask "chromedriver"
+cask "cleanshot"
 cask "cursor"
+cask "flipper"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
@@ -47,11 +52,11 @@ cask "orbstack"
 cask "raycast"
 cask "rectangle"
 cask "slack"
+cask "tableplus"
 cask "warp"
 cask "zulu17"
 mas "Bitwarden", id: 1352778147
 mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
