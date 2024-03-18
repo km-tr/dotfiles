@@ -8,6 +8,9 @@ path+=($ANDROID_HOME/platform-tools)
 export GOPATH=$HOME/go
 path+=($GOPATH/bin)
 
+export BUNPATH=$HOME/.bun
+path+=($BUNPATH/bin)
+
 path+=/opt/homebrew/opt/protobuf@3/bin
 path+=/opt/homebrew/opt/libpq/bin
 
