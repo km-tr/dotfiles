@@ -22,5 +22,4 @@
 	defaultBranch = main
 [diff]
 	algorithm = histogram
-[merge]
-	conflictstyle = zdiff3
+
