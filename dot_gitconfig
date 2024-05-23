@@ -17,7 +17,7 @@
 [fetch]
 	prune = true
 [pull]
-	rebase = true
+	rebase = merges
 [init]
 	defaultBranch = main
 [diff]
