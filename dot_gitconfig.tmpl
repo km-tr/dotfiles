@@ -1,7 +1,7 @@
 [user]
 	name = km-tr
 	email = kumagai@bear.tokyo
-	signingkey = {{ keyring "github" .github.user | quote }}
+	signingkey = {{ keyring "github" .github.signingkey | quote }}
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 [core]
