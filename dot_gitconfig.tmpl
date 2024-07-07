@@ -1,6 +1,7 @@
 [user]
 	name = km-tr
 	email = kumagai@bear.tokyo
+	signingkey = {{ .github.user }}
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 [core]
@@ -13,7 +14,7 @@
 	autosquash = true
 	autostash = true
 [color]
-        ui = auto
+  ui = auto
 [fetch]
 	prune = true
 [pull]
@@ -22,4 +23,7 @@
 	defaultBranch = main
 [diff]
 	algorithm = histogram
+[gpg]
+	format = ssh
+
 
