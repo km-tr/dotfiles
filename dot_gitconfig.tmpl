@@ -1,7 +1,7 @@
 [user]
 	name = km-tr
 	email = kumagai@bear.tokyo
-	signingkey = {{ (bitwarden "notes" "github-signingkey").notes | quote }}
+	signingkey = "{{ (bitwarden "notes" "github-signingkey").notes }}"
 [url "git@github.com:"]
 	insteadOf = "https://github.com/"
 [core]
