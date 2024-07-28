@@ -17,3 +17,4 @@ R.java
 *.project
 .shadowenv.d
 .mise.toml
+vendor/bundle
