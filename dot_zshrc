@@ -19,8 +19,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(sheldon source)"
 
-eval "$(direnv hook zsh)"
-
 eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 eval "$(zoxide init zsh)"
