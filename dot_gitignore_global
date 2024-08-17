@@ -18,4 +18,4 @@ R.java
 .shadowenv.d
 .mise.toml
 **/vendor/bundle
-android/.project
+**/android/.project
