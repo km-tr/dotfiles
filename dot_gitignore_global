@@ -19,3 +19,4 @@ R.java
 .mise.toml
 **/vendor/bundle
 **/android/.project
+docker-compose.custom.yml
