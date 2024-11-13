@@ -16,7 +16,7 @@ Manifest.java
 R.java
 *.project
 .shadowenv.d
-.mise.toml
+.mise.local.toml
 **/vendor/bundle
 **/android/.project
 docker-compose.custom.yml
