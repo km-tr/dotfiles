@@ -44,3 +44,6 @@ alias gcmc='git commit -m "chore:'
 alias gcmrv='git commit -m "revert:'
 
 alias cm='chezmoi'
+
+alias brwe="brew"
+alias bbd="brew bundle dump --global --force"
