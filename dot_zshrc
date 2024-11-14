@@ -48,5 +48,3 @@ alias cm='chezmoi'
 alias brwe="brew"
 alias bbd="brew bundle dump --global --force"
 
-printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh"}}\x9c'
-
