@@ -20,3 +20,4 @@ R.java
 **/vendor/bundle
 **/android/.project
 docker-compose.custom.yml
+.cursorrules
