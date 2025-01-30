@@ -21,3 +21,4 @@ R.java
 **/android/.project
 docker-compose.custom.yml
 .cursorrules
+.clinerules
