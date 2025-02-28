@@ -22,5 +22,6 @@ R.java
 docker-compose.custom.yml
 .cursorrules
 .cursor/rules
+.cline
 .clinerules
 CLAUDE.md
