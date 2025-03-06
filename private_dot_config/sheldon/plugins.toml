@@ -22,3 +22,4 @@ use = ["{git}/*.plugin.zsh"]
 
 [plugins.spaceship]
 github = "spaceship-prompt/spaceship-prompt"
+proto = "ssh"
