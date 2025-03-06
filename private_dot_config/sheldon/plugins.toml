@@ -20,5 +20,5 @@ dir = "plugins"
 github = "ohmyzsh/ohmyzsh"
 use = ["{git}/*.plugin.zsh"]
 
-[plugins.spaceship]
-github = "spaceship-prompt/spaceship-prompt"
+# [plugins.spaceship]
+# github = "spaceship-prompt/spaceship-prompt"
