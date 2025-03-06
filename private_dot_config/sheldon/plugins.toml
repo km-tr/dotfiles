@@ -19,3 +19,6 @@ inline = 'autoload -Uz compinit && compinit'
 dir = "plugins"
 github = "ohmyzsh/ohmyzsh"
 use = ["{git}/*.plugin.zsh"]
+
+[plugins.spaceship]
+github = "spaceship-prompt/spaceship-prompt"
