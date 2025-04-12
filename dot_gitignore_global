@@ -28,3 +28,4 @@ docker-compose.custom.yml
 .rooignore
 CLAUDE.md
 INSTRUCTIONS.md
+wt-*/
