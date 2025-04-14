@@ -25,7 +25,4 @@ github = "sindresorhus/pure"
 use = ["async.zsh", "pure.zsh"]
 
 [plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
-use = ["zsh-autocomplete.plugin.zsh"]
-proto = "ssh"
-
+git = "ssh://git@github.com/marlonrichert/zsh-autocomplete"
