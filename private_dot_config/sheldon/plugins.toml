@@ -23,3 +23,6 @@ use = ["{git}/*.plugin.zsh"]
 [plugins.pure]
 github = "sindresorhus/pure"
 use = ["async.zsh", "pure.zsh"]
+
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"
