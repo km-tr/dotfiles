@@ -24,5 +24,4 @@ use = ["{git}/*.plugin.zsh"]
 github = "sindresorhus/pure"
 use = ["async.zsh", "pure.zsh"]
 
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
+
