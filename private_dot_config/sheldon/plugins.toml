@@ -26,4 +26,5 @@ use = ["async.zsh", "pure.zsh"]
 
 [plugins.zsh-autocomplete]
 github = "marlonrichert/zsh-autocomplete"
+use = ["zsh-autocomplete.plugin.zsh"]
 
