@@ -25,6 +25,7 @@ docker-compose.custom.yml
 .cursor/rules
 .cline
 .clinerules
+.clineignore
 .rooignore
 CLAUDE.md
 INSTRUCTIONS.md
