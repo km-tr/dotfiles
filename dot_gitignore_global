@@ -20,10 +20,10 @@ R.java
 **/vendor/bundle
 **/android/.project
 docker-compose.custom.yml
+memory-bank
 .cursorrules
 .cursorignore
 .cursor/rules
-.cline
 .clinerules
 .clineignore
 .roo/
