@@ -28,6 +28,6 @@ memory-bank
 .roo/
 .roorules
 .rooignore
-CLAUDE.md
+CLAUDE.local.md
 INSTRUCTIONS.md
 wt-*/
