@@ -28,4 +28,7 @@ use = ["async.zsh", "pure.zsh"]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 
+[plugins.history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+
 
