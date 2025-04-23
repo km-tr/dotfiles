@@ -50,6 +50,8 @@ alias cm='chezmoi'
 alias brwe="brew"
 alias bbd="brew bundle dump --global --force"
 
+alias cdgw='cd "$(git worktree list | fzf | awk '{print $1}')"'
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
@@ -59,3 +61,4 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 cdgw() {
     cd "$(git worktree list | fzf | awk '{print $1}')"
 }
+
