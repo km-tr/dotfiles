@@ -25,6 +25,7 @@ memory-bank
 .cursorignore
 .cursor/rules
 .roorules
+.roo/rules/symbolic
 .rooignore
 CLAUDE.local.md
 INSTRUCTIONS.md
