@@ -15,7 +15,7 @@ export BUNPATH=$HOME/.bun
 path+=($BUNPATH/bin)
 
 path+=/opt/homebrew/opt/protobuf@3/bin
-path+=/opt/homebrew/opt/libpq/bin
+path+=/opt/homebrew/opt/postgresql@15/bin
 
 # eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
