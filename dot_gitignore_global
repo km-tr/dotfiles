@@ -28,6 +28,7 @@ memory-bank
 .roo/rules/symbolic
 .rooignore
 .claude/commands/local
+docs/local
 CLAUDE.local.md
 INSTRUCTIONS.md
 wt-*/
