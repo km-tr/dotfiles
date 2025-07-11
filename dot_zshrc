@@ -14,6 +14,8 @@ path+=($GOPATH/bin)
 export BUNPATH=$HOME/.bun
 path+=($BUNPATH/bin)
 
+path+=$HOME/.local/bin
+
 path+=/opt/homebrew/opt/protobuf@3/bin
 path+=/opt/homebrew/opt/postgresql@15/bin
 
