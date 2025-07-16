@@ -28,6 +28,8 @@ eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 eval "$(zoxide init zsh)"
 
+source <(fzf --zsh)
+
 source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
 # aliases
