@@ -62,6 +62,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 
-cdgw() {
+gwcd() {
     cd "$(git worktree list | fzf | awk '{print $1}')"
 }
