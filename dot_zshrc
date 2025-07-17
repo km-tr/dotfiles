@@ -32,27 +32,27 @@ source <(fzf --zsh)
 
 source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
-# abbreviations
-abbr tis='tig status'
+# aliases
+alias tis='tig status'
 
-abbr dc='docker compose'
+alias dc='docker compose'
 
-abbr gcmf='git commit -m "feat:'
-abbr gcmfi='git commit -m "fix:'
-abbr gcmd='git commit -m "docs:'
-abbr gcms='git commit -m "style:'
-abbr gcmr='git commit -m "refactor:'
-abbr gcmp='git commit -m "perf:'
-abbr gcmt='git commit -m "test:'
-abbr gcmb='git commit -m "build:'
-abbr gcmci='git commit -m "ci:'
-abbr gcmc='git commit -m "chore:'
-abbr gcmrv='git commit -m "revert:'
+alias gcmf='git commit -m "feat:'
+alias gcmfi='git commit -m "fix:'
+alias gcmd='git commit -m "docs:'
+alias gcms='git commit -m "style:'
+alias gcmr='git commit -m "refactor:'
+alias gcmp='git commit -m "perf:'
+alias gcmt='git commit -m "test:'
+alias gcmb='git commit -m "build:'
+alias gcmci='git commit -m "ci:'
+alias gcmc='git commit -m "chore:'
+alias gcmrv='git commit -m "revert:'
 
-abbr cm='chezmoi'
+alias cm='chezmoi'
 
-abbr brwe="brew"
-abbr bbd="brew bundle dump --global --force"
+alias brwe="brew"
+alias bbd="brew bundle dump --global --force"
 
 
 # The next line updates PATH for the Google Cloud SDK.
