@@ -1,0 +1,31 @@
+[tools]
+bun = "1.1.28"
+node = "20.17.0"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+
+[tasks.copy-local-files]
+
+run = """
+#!/usr/bin/env bash
+
+SRC=~/hoge/auto_reserve_front
+DEST="$(pwd)"
+
+(
+  cd "$SRC"
+  find . \\( -type d \\( -name node_modules -o -name .git -o -name .history \\) -prune \\) -o \
+       -type f \\( \
+          -name '.env' -o \
+          -path './.vscode/*' -o \
+          -name '*.local' -o \
+          -name '*.local.md' -o \
+          -name '.mise.local.toml' -o \
+          -name '.cursorrules' -o \
+          -path './*/local/*.md' -o \
+          -path './*/.vercel/*' -o \
+          -name '*.local.json' \
+       \\) -print0
+) | rsync -av --from0 --relative --files-from=- "$SRC/" "$DEST/"
+"""
