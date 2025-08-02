@@ -25,6 +25,7 @@ DEST="$(pwd)"
           -name '.cursorrules' -o \
           -path './*/local/*.md' -o \
           -path './*/.vercel/*' -o \
+          -path './.serena/*' -o \
           -name '*.local.json' \
        \\) -print0
 ) | rsync -av --from0 --relative --files-from=- "$SRC/" "$DEST/"
