@@ -19,6 +19,8 @@ path+=$HOME/.local/bin
 path+=/opt/homebrew/opt/protobuf@3/bin
 path+=/opt/homebrew/opt/postgresql@15/bin
 
+path+=$HOME/.lmstudio/bin
+
 # eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
