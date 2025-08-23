@@ -34,3 +34,5 @@ INSTRUCTIONS.md
 wt-*/
 copy-files.sh
 .serena
+.qoder
+llm-config.yaml
