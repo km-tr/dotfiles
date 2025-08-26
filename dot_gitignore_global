@@ -36,3 +36,4 @@ copy-files.sh
 .serena
 .qoder
 llm-config.yaml
+AGENTS.md
