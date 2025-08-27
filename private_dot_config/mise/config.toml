@@ -23,6 +23,7 @@ DEST="$(pwd)"
           -name '*.local.md' -o \
           -name '.mise.local.toml' -o \
           -name '.cursorrules' -o \
+          -name 'AGENTS.md' -o \
           -path './*/local/*.md' -o \
           -path './*/.vercel/*' -o \
           -path './.serena/*' -o \
