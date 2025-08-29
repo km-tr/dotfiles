@@ -26,6 +26,7 @@ DEST="$(pwd)"
             -name 'AGENTS.md' -o \
             -path './*/local/*.md' -o \
             -path './*/.vercel/*' -o \
+            -path './*/.cursor/*' -o \
             -path './.serena/*' -o \
             -name '*.local.json' \
          \\) -print0
