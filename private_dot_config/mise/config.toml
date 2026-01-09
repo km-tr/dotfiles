@@ -5,6 +5,9 @@ node = "22.16.0"
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
 
+[env]
+ENABLE_LSP_TOOL=1
+
 [tasks.copy-local-files]
 
 run = """
