@@ -2,4 +2,4 @@
 autoCommit = true
 [edit]
 args = ["--wait", "-n"]
-command = "cursor"
+command = "zed"
