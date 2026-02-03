@@ -19,7 +19,7 @@ DEST="$(pwd)"
 (
   cd "$SRC"
   find . \\( -type d \\( -name node_modules -o -name .git -o -name .history \\) -prune \\) -o \
-         \\( -type f -o -type l \\) \\( \
+         \\( -type f -o -type l -o -type d \\) \\( \
             -name '.env' -o \
             -path './.vscode/*' -o \
             \\( -name '*.local' -a ! -name '.xcode.env.local' \\) -o \
@@ -27,10 +27,10 @@ DEST="$(pwd)"
             -name '.mise.local.toml' -o \
             -name '.cursorrules' -o \
             -name 'AGENTS.md' -o \
+            -name 'local' -o \
             -path './*/local/*.md' -o \
             -path './*/.vercel/*' -o \
             -path './.cursor/*' -o \
-            -path './.serena/*' -o \
             -name '*.local.json' \
          \\) -print0
 ) | rsync -av --from0 --relative --files-from=- "$SRC/" "$DEST/"
