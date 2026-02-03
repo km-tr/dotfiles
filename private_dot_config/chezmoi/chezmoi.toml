@@ -1,5 +1,5 @@
 [git]
 autoCommit = true
 [edit]
-args = ["--wait"]
-command = "zed"
+args = ["--wait", "-n"]
+command = "cursor"
