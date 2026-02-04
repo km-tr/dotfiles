@@ -3,3 +3,5 @@ autoCommit = true
 [edit]
 args = ["--wait", "-n"]
 command = "cursor"
+[bitwarden]
+unlock = "auto"
