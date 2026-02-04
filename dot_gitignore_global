@@ -39,3 +39,4 @@ copy-files.sh
 llm-config.yaml
 AGENTS.md
 .codex/environments/local.toml
+.playwright-cli/
