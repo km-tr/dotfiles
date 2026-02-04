@@ -82,7 +82,7 @@ y() {
 }
 
 wi() {
-  set -euo pipefail
+  # set -euo pipefail
 
   local base="origin/master"
   local launch=""   # codex | claude | ""
