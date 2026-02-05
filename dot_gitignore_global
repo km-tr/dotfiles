@@ -29,7 +29,9 @@ memory-bank
 .roo/rules/symbolic
 .rooignore
 .claude/*/local
+.claude/*/*.local/
 .agents/*/local
+.agents/*/*.local/
 docs/local
 CLAUDE.local.md
 INSTRUCTIONS.md
