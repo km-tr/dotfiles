@@ -44,3 +44,4 @@ AGENTS.md
 .codex/environments/local.toml
 .playwright-cli/
 .wtp.yml
+.twig/
