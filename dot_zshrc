@@ -38,6 +38,8 @@ source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
 eval "$(wtp shell-init zsh)"
 
+eval "$(twig completion zsh)"
+
 # aliases
 alias tis='tig status'
 
