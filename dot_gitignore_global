@@ -41,6 +41,7 @@ copy-files.sh
 .qoder
 llm-config.yaml
 AGENTS.md
+AGENTS.override.md
 .codex/environments/local.toml
 .playwright-cli/
 .wtp.yml
