@@ -31,4 +31,6 @@ use = ["{{ name }}.zsh"]
 [plugins.history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 
-
+[plugins.local-functions]
+local = "~/.config/zsh/functions"
+use = ["*.zsh"]
