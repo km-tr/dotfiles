@@ -107,14 +107,7 @@ wi() {
 }
 
 wi-rm() {
-  local selected name
-  selected="$(wtp list | fzf --header-lines=1)" || return 0
-  name="$(echo "$selected" | awk '{print $1}')"
-  name="$(basename "$name")"
-  [[ -z "$name" ]] && { echo "ERROR: could not extract worktree name" >&2; return 1; }
-  echo "Removing worktree: $name"
-  wtp rm "$name"
-  return $?
+  wtp list -q | fzf | xargs wtp rm
 }
 
 wi-cd() {
