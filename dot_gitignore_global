@@ -46,3 +46,4 @@ AGENTS.override.md
 .playwright-cli/
 .wtp.yml
 .twig/
+.takt/.gitignore
