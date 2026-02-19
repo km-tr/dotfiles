@@ -107,9 +107,15 @@ wi() {
 }
 
 wi-rm() {
-  wtp list -q | fzf | xargs wtp rm
+  local selected
+  selected=$(git worktree list | awk '{sub(/.*\//, "", $1); print}' | fzf) || return
+  [[ -z "$selected" ]] && return
+  wtp rm "${selected%% *}"
 }
 
 wi-cd() {
-  wtp cd "$(wtp list -q | fzf)"
+  local selected
+  selected=$(git worktree list | awk '{sub(/.*\//, "", $1); print}' | fzf) || return
+  [[ -z "$selected" ]] && return
+  wtp cd "${selected%% *}"
 }
