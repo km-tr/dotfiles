@@ -63,7 +63,7 @@ wi() {
   out="$(
     printf "RULES:\n%s\n\nTASK:\nReturn ONLY a git branch name following the rules above.\nNo extra text.\n\nINPUT:\ntitle: %s\nissue: %s\n" \
       "$rules" "$title" "$issue" \
-    | llm -m gemini-flash-lite-latest -s "Output only: branch name, excluding ブランチマン" \
+    | llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
   )"
 
   slug="$(echo "$out" | tr -d '\r' | head -n1 | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
