@@ -1,5 +1,10 @@
 wi() {
-  local base="origin/master"
+  local base
+  base="$(git rev-parse --abbrev-ref origin/HEAD 2>/dev/null)"
+  if [[ -z "$base" ]]; then
+    echo "ERROR: cannot detect origin default branch. Run: git remote set-head origin --auto" >&2
+    return 1
+  fi
   local launch=""   # codex | claude | ""
 
   local -a args
@@ -32,7 +37,7 @@ wi() {
 
   local raw="${(j: :)args}"
   if [[ -z "${raw// }" ]]; then
-    echo 'usage: wi "<title #111>" | wi "111" [--base origin/master] [--codex|--claude]' >&2
+    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude]' >&2
     return 1
   fi
 
