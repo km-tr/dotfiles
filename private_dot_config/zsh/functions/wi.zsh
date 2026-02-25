@@ -107,15 +107,19 @@ wi() {
 }
 
 wi-rm() {
-  local selected
-  selected=$(git worktree list | awk '{sub(/.*\//, "", $1); print}' | fzf) || return
+  local selected wt_path wt_name
+  selected=$(git worktree list | fzf) || return
   [[ -z "$selected" ]] && return
-  wtp rm "${selected%% *}"
+  wt_path=$(echo "$selected" | awk '{print $1}')
+  wt_name="${wt_path##*/}"
+  git worktree remove "$wt_path" \
+    && echo "Removed worktree: $wt_name"
 }
 
 wi-cd() {
-  local selected
-  selected=$(git worktree list | awk '{sub(/.*\//, "", $1); print}' | fzf) || return
+  local selected wt_path
+  selected=$(git worktree list | fzf) || return
   [[ -z "$selected" ]] && return
-  wtp cd "${selected%% *}"
+  wt_path=$(echo "$selected" | awk '{print $1}')
+  cd "$wt_path"
 }
