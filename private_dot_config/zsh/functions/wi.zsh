@@ -99,20 +99,20 @@ wi() {
   if $use_cmux; then
     command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
     local ws
-    ws=$(cmux new-workspace 2>&1 | awk '{print $2}')
+    ws=$(cmux new-workspace 2>/dev/null | awk '{print $2}')
     if [[ -z "$ws" ]]; then
       echo "ERROR: failed to create cmux workspace" >&2
       return 1
     fi
     echo "cmux  : $ws"
 
-    cmux send --workspace "$ws" "wtp cd $branch"
-    cmux send-key --workspace "$ws" Enter
+    cmux send --workspace "$ws" "wtp cd $branch" 2>/dev/null
+    cmux send-key --workspace "$ws" Enter 2>/dev/null
 
     # 起動（どちらか一方のみ）
     if [[ -n "$launch" ]]; then
-      cmux send --workspace "$ws" "$launch"
-      cmux send-key --workspace "$ws" Enter
+      cmux send --workspace "$ws" "$launch" 2>/dev/null
+      cmux send-key --workspace "$ws" Enter 2>/dev/null
     fi
   else
     # 遷移
