@@ -6,6 +6,7 @@ wi() {
     return 1
   fi
   local launch=""   # codex | claude | ""
+  local use_cmux=false
 
   local -a args
   args=()
@@ -26,6 +27,8 @@ wi() {
           return 1
         fi
         launch="claude"; shift ;;
+      --cmux)
+        use_cmux=true; shift ;;
       --)
         shift; args+=("$@"); break ;;
       -*)
@@ -93,22 +96,31 @@ wi() {
   # wtp add は [<commit>] を第2引数で受ける
   wtp add -b "$branch" "$base"
 
-  # # 遷移
-  wtp cd "$branch"
+  if $use_cmux; then
+    command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
+    local ws
+    ws=$(cmux new-workspace 2>&1 | awk '{print $2}')
+    if [[ -z "$ws" ]]; then
+      echo "ERROR: failed to create cmux workspace" >&2
+      return 1
+    fi
+    echo "cmux  : $ws"
 
-  # 起動（どちらか一方のみ）
-  case "$launch" in
-    codex)
-      command -v codex >/dev/null 2>&1 || { echo "ERROR: codex not found in PATH" >&2; return 1; }
-      codex
-      ;;
-    claude)
-      command -v claude >/dev/null 2>&1 || { echo "ERROR: claude not found in PATH" >&2; return 1; }
-      claude
-      ;;
-    "")
-      ;;
-  esac
+    cmux send --workspace "$ws" "wtp cd $branch"
+    cmux send-key --workspace "$ws" Enter
+
+    # 起動（どちらか一方のみ）
+    if [[ -n "$launch" ]]; then
+      cmux send --workspace "$ws" "$launch"
+      cmux send-key --workspace "$ws" Enter
+    fi
+  else
+    # 遷移
+    wtp cd "$branch"
+
+    # 起動
+    [[ -n "$launch" ]] && "$launch"
+  fi
 }
 
 wi-rm() {
