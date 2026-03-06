@@ -112,13 +112,25 @@ wi() {
 }
 
 wi-rm() {
-  local selected wt_path wt_name
-  selected=$(git worktree list | fzf) || return
+  local -a rm_opts
+  rm_opts=()
+  while (( $# )); do
+    case "$1" in
+      -f|--force) rm_opts+=(--force); shift ;;
+      *) echo "Unknown flag: $1" >&2; return 1 ;;
+    esac
+  done
+
+  local selected
+  selected=$(git worktree list | fzf -m) || return
   [[ -z "$selected" ]] && return
-  wt_path=$(echo "$selected" | awk '{print $1}')
-  wt_name="${wt_path##*/}"
-  git worktree remove "$wt_path" \
-    && echo "Removed worktree: $wt_name"
+  echo "$selected" | while IFS= read -r line; do
+    local wt_path wt_name
+    wt_path=$(echo "$line" | awk '{print $1}')
+    wt_name="${wt_path##*/}"
+    git worktree remove "${rm_opts[@]}" "$wt_path" \
+      && echo "Removed worktree: $wt_name"
+  done
 }
 
 wi-cd() {
