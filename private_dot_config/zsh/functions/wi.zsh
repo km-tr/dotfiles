@@ -93,10 +93,10 @@ wi() {
   echo "base  : $base"
   echo "branch: $branch"
 
-  # wtp add は [<commit>] を第2引数で受ける
-  wtp add -b "$branch" "$base"
-
   if $use_cmux; then
+    # wtp add（パイプで非TTYにしてcdを抑制）
+    wtp add -b "$branch" "$base" | cat
+
     command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
     local ws
     ws=$(cmux new-workspace 2>/dev/null | awk '{print $2}')
@@ -115,8 +115,8 @@ wi() {
       cmux send-key --workspace "$ws" Enter 2>/dev/null
     fi
   else
-    # 遷移
-    wtp cd "$branch"
+    # wtp add でworktree作成＋cd
+    wtp add -b "$branch" "$base"
 
     # 起動
     [[ -n "$launch" ]] && "$launch"
