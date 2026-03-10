@@ -30,9 +30,11 @@ memory-bank
 .rooignore
 .claude/*/local
 .claude/*/*.local/
+.claude/scheduled_tasks.lock
 .agents/*/local
 .agents/*/*.local/
 docs/local
+docs/superpowers
 CLAUDE.local.md
 INSTRUCTIONS.md
 wt-*/
