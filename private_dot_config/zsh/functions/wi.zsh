@@ -7,6 +7,7 @@ wi() {
   fi
   local launch=""   # codex | claude | ""
   local use_cmux=false
+  local prompt=""
 
   local -a args
   args=()
@@ -27,6 +28,8 @@ wi() {
           return 1
         fi
         launch="claude"; shift ;;
+      --prompt|-p)
+        prompt="${2:?missing value for --prompt}"; shift 2 ;;
       --cmux)
         use_cmux=true; shift ;;
       --)
@@ -40,7 +43,7 @@ wi() {
 
   local raw="${(j: :)args}"
   if [[ -z "${raw// }" ]]; then
-    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude]' >&2
+    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."]' >&2
     return 1
   fi
 
@@ -58,6 +61,11 @@ wi() {
 
   if [[ -z "$title" && -z "$issue" ]]; then
     echo 'ERROR: title and issue are empty. Include a title and/or "#111".' >&2
+    return 1
+  fi
+
+  if [[ -n "$prompt" && -z "$launch" ]]; then
+    echo 'ERROR: --prompt requires --codex or --claude' >&2
     return 1
   fi
 
@@ -111,7 +119,11 @@ wi() {
 
     # 起動（どちらか一方のみ）
     if [[ -n "$launch" ]]; then
-      cmux send --workspace "$ws" "$launch" 2>/dev/null
+      if [[ -n "$prompt" ]]; then
+        cmux send --workspace "$ws" "$launch $(printf '%q' "$prompt")" 2>/dev/null
+      else
+        cmux send --workspace "$ws" "$launch" 2>/dev/null
+      fi
       cmux send-key --workspace "$ws" Enter 2>/dev/null
     fi
   else
@@ -119,7 +131,13 @@ wi() {
     wtp add -b "$branch" "$base"
 
     # 起動
-    [[ -n "$launch" ]] && "$launch"
+    if [[ -n "$launch" ]]; then
+      if [[ -n "$prompt" ]]; then
+        "$launch" "$prompt"
+      else
+        "$launch"
+      fi
+    fi
   fi
 }
 
