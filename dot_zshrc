@@ -40,6 +40,10 @@ eval "$(wtp shell-init zsh)"
 
 eval "$(twig completion zsh)"
 
+# bindkey
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 # aliases
 alias tis='tig status'
 
