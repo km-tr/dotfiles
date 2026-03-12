@@ -13,6 +13,7 @@
 [rebase]
 	autosquash = true
 	autostash = true
+	updateRefs = true
 [commit]
 	gpgsign = true
 [color]
@@ -33,4 +34,4 @@
 	required = true
 	clean = git-lfs clean -- %f
 [coderabbit]
-    machineId = "{{ (bitwarden "item" "coderabbit-machine-id").notes }}"
+  machineId = "{{ (bitwarden "item" "coderabbit-machine-id").notes }}"
