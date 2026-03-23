@@ -26,6 +26,7 @@ memory-bank
 .cursor/rules
 .cursor/commands
 .cursor/plans
+.cursor/.gitignore
 .roorules
 .roo/rules/symbolic
 .rooignore
