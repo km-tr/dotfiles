@@ -8,6 +8,7 @@ wi() {
   local launch=""   # codex | claude | ""
   local use_cmux=false
   local prompt=""
+  local branch=""
 
   local -a args
   args=()
@@ -16,6 +17,8 @@ wi() {
     case "$1" in
       --base)
         base="${2:?missing value for --base}"; shift 2 ;;
+      --branch|-b)
+        branch="${2:?missing value for --branch}"; shift 2 ;;
       --codex)
         if [[ -n "$launch" && "$launch" != "codex" ]]; then
           echo "ERROR: use only one of --codex or --claude" >&2
@@ -42,25 +45,15 @@ wi() {
   done
 
   local raw="${(j: :)args}"
-  if [[ -z "${raw// }" ]]; then
-    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."]' >&2
+  if [[ -n "$branch" && ${#args[@]} -gt 0 ]]; then
+    echo 'ERROR: --branch cannot be used with title/issue arguments' >&2
+    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."] [--cmux]' >&2
+    echo '       wi -b|--branch <branch> [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."] [--cmux]' >&2
     return 1
   fi
-
-  # issue番号を抽出（LLMに任せない）
-  local issue
-  issue="$(echo "$raw" | grep -Eo '#?[0-9]+' | head -n1 | tr -d '#')"
-
-  # title: issueがあれば除去、なければrawをそのままトリム
-  local title
-  if [[ -n "$issue" ]]; then
-    title="$(echo "$raw" | sed -E "s/(^|[^0-9])#?$issue([^0-9]|$)/ /" | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//')"
-  else
-    title="$(echo "$raw" | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//')"
-  fi
-
-  if [[ -z "$title" && -z "$issue" ]]; then
-    echo 'ERROR: title and issue are empty. Include a title and/or "#111".' >&2
+  if [[ -z "$branch" && -z "${raw// }" ]]; then
+    echo 'usage: wi "<title #111>" | wi "111" [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."] [--cmux]' >&2
+    echo '       wi -b|--branch <branch> [--base origin/<default>] [--codex|--claude] [--prompt|-p "..."] [--cmux]' >&2
     return 1
   fi
 
@@ -69,35 +62,56 @@ wi() {
     return 1
   fi
 
-  local rules_file="$HOME/docs/branch.md"
-  [[ -f "$rules_file" ]] || { echo "ERROR: rules file not found: $rules_file" >&2; return 1; }
-  command -v llm >/dev/null 2>&1 || { echo "ERROR: 'llm' not found. Install with: pipx install llm" >&2; return 1; }
+  local issue=""
+  local title=""
+  if [[ -z "$branch" ]]; then
+    # issue番号を抽出（LLMに任せない）
+    issue="$(echo "$raw" | grep -Eo '#?[0-9]+' | head -n1 | tr -d '#')"
 
-  local rules out slug
-  rules="$(cat "$rules_file")"
+    # title: issueがあれば除去、なければrawをそのままトリム
+    if [[ -n "$issue" ]]; then
+      title="$(echo "$raw" | sed -E "s/(^|[^0-9])#?$issue([^0-9]|$)/ /" | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//')"
+    else
+      title="$(echo "$raw" | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//')"
+    fi
 
-  out="$(
-    printf "RULES:\n%s\n\nTASK:\nReturn ONLY a git branch name following the rules above.\nNo extra text.\n\nINPUT:\ntitle: %s\nissue: %s\n" \
-      "$rules" "$title" "$issue" \
-    | llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
-  )"
+    if [[ -z "$title" && -z "$issue" ]]; then
+      echo 'ERROR: title and issue are empty. Include a title and/or "#111".' >&2
+      return 1
+    fi
 
-  slug="$(echo "$out" | tr -d '\r' | head -n1 | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
+    local rules_file="$HOME/docs/branch.md"
+    [[ -f "$rules_file" ]] || { echo "ERROR: rules file not found: $rules_file" >&2; return 1; }
+    command -v llm >/dev/null 2>&1 || { echo "ERROR: 'llm' not found. Install with: pipx install llm" >&2; return 1; }
 
-  if [[ -z "$slug" || "$slug" =~ [[:space:]] ]]; then
-    echo "ERROR: invalid slug: $slug" >&2
-    return 1
+    local rules out slug
+    rules="$(cat "$rules_file")"
+
+    out="$(
+      printf "RULES:\n%s\n\nTASK:\nReturn ONLY a git branch name following the rules above.\nNo extra text.\n\nINPUT:\ntitle: %s\nissue: %s\n" \
+        "$rules" "$title" "$issue" \
+      | llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
+    )"
+
+    slug="$(echo "$out" | tr -d '\r' | head -n1 | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
+
+    if [[ -z "$slug" || "$slug" =~ [[:space:]] ]]; then
+      echo "ERROR: invalid slug: $slug" >&2
+      return 1
+    fi
+    if [[ "$slug" == *"ブランチマン"* ]]; then
+      echo "ERROR: invalid slug (contains ブランチマン): $slug" >&2
+      return 1
+    fi
+
+    branch="${slug}"
   fi
-  if [[ "$slug" == *"ブランチマン"* ]]; then
-    echo "ERROR: invalid slug (contains ブランチマン): $slug" >&2
-    return 1
+
+  if [[ -n "$raw" ]]; then
+    echo "input : $raw"
+    echo "title : $title"
+    echo "issue : $issue"
   fi
-
-  local branch="${slug}"
-
-  echo "input : $raw"
-  echo "title : $title"
-  echo "issue : $issue"
   echo "base  : $base"
   echo "branch: $branch"
 
