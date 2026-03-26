@@ -31,11 +31,11 @@ memory-bank
 .roo/rules/symbolic
 .rooignore
 .claude/*/local
-.claude/*/*.local/
+.claude/*/*-local/
 .claude/scheduled_tasks.lock
 .claude/works
 .agents/*/local
-.agents/*/*.local/
+.agents/*/*-local/
 docs/local
 docs/superpowers
 CLAUDE.local.md
