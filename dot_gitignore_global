@@ -47,7 +47,7 @@ copy-files.sh
 llm-config.yaml
 AGENTS.override.md
 .codex/environments/local.toml
-.codex/hooks/
+.codex/hooks
 .codex/hooks.json
 .playwright-cli/
 .wtp.yml
