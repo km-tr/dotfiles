@@ -78,8 +78,3 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 
 
 
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/kmtr/.lmstudio/bin"
-# End of LM Studio CLI section
-
