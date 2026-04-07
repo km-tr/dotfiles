@@ -120,25 +120,27 @@ wi() {
     wtp add -b "$branch" "$base" | cat
 
     command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
+    local cwd workspace_name cmd
+    cwd="$(wtp cd "$branch")" || return 1
+    workspace_name="${title:-$branch}"
+    local -a cmux_args
+    cmux_args=(new-workspace --cwd "$cwd" --name "$workspace_name")
+    if [[ -n "$launch" ]]; then
+      cmd="$launch"
+      if [[ -n "$prompt" ]]; then
+        cmd="$cmd $(printf '%q' "$prompt")"
+      fi
+      cmux_args+=(--command "$cmd")
+    fi
     local ws
-    ws=$(cmux new-workspace 2>/dev/null | awk '{print $2}')
+    ws=$(cmux "${cmux_args[@]}" 2>/dev/null | awk '{print $2}')
     if [[ -z "$ws" ]]; then
       echo "ERROR: failed to create cmux workspace" >&2
       return 1
     fi
     echo "cmux  : $ws"
-
-    cmux send --workspace "$ws" "wtp cd $branch" 2>/dev/null
-    cmux send-key --workspace "$ws" Enter 2>/dev/null
-
-    # 起動（どちらか一方のみ）
-    if [[ -n "$launch" ]]; then
-      if [[ -n "$prompt" ]]; then
-        cmux send --workspace "$ws" "$launch $(printf '%q' "$prompt")" 2>/dev/null
-      else
-        cmux send --workspace "$ws" "$launch" 2>/dev/null
-      fi
-      cmux send-key --workspace "$ws" Enter 2>/dev/null
+    if ! cmux workspace-action --workspace "$ws" --action set-color --color Teal 2>/dev/null; then
+      echo "WARN: failed to set cmux workspace color: $ws" >&2
     fi
   else
     # wtp add でworktree作成＋cd
