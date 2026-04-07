@@ -127,6 +127,9 @@ wi() {
     cmux_args=(new-workspace --cwd "$cwd" --name "$workspace_name")
     if [[ -n "$launch" ]]; then
       cmd="$launch"
+      if [[ "$launch" == "codex" ]]; then
+        cmd="$cmd --full-auto"
+      fi
       if [[ -n "$prompt" ]]; then
         cmd="$cmd $(printf '%q' "$prompt")"
       fi
