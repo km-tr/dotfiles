@@ -86,12 +86,29 @@ wi() {
 
     local rules out slug
     rules="$(cat "$rules_file")"
+    echo "branch: generating from title..."
 
     out="$(
       printf "RULES:\n%s\n\nTASK:\nReturn ONLY a git branch name following the rules above.\nNo extra text.\n\nINPUT:\ntitle: %s\nissue: %s\n" \
         "$rules" "$title" "$issue" \
-      | llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
+      | python3 -c 'import subprocess, sys
+timeout = int(sys.argv[1])
+cmd = sys.argv[2:]
+try:
+    raise SystemExit(subprocess.run(cmd, timeout=timeout).returncode)
+except subprocess.TimeoutExpired:
+    raise SystemExit(124)
+' "${WI_LLM_TIMEOUT_SECONDS:-15}" llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
     )"
+    local llm_status=$?
+    if [[ "$llm_status" -eq 124 ]]; then
+      echo "ERROR: timed out generating branch name after ${WI_LLM_TIMEOUT_SECONDS:-15}s" >&2
+      return 1
+    fi
+    if [[ "$llm_status" -ne 0 ]]; then
+      echo "ERROR: failed to generate branch name" >&2
+      return 1
+    fi
 
     slug="$(echo "$out" | tr -d '\r' | head -n1 | sed -E 's/^[[:space:]]+|[[:space:]]+$//g')"
 
