@@ -9,6 +9,7 @@ wi() {
   local use_cmux=false
   local prompt=""
   local branch=""
+  local explicit_branch=false
 
   local -a args
   args=()
@@ -18,7 +19,7 @@ wi() {
       --base)
         base="${2:?missing value for --base}"; shift 2 ;;
       --branch|-b)
-        branch="${2:?missing value for --branch}"; shift 2 ;;
+        branch="${2:?missing value for --branch}"; explicit_branch=true; shift 2 ;;
       --codex)
         if [[ -n "$launch" && "$launch" != "codex" ]]; then
           echo "ERROR: use only one of --codex or --claude" >&2
@@ -132,9 +133,26 @@ except subprocess.TimeoutExpired:
   echo "base  : $base"
   echo "branch: $branch"
 
+  local -a wtp_add_args
+  wtp_add_args=(add -b "$branch" "$base")
+  if $explicit_branch; then
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+      wtp_add_args=(add "$branch")
+    else
+      git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1
+      local remote_status=$?
+      if [[ "$remote_status" -eq 0 ]]; then
+        wtp_add_args=(add "$branch")
+      elif [[ "$remote_status" -ne 2 ]]; then
+        echo "ERROR: failed to check whether branch exists on origin: $branch" >&2
+        return 1
+      fi
+    fi
+  fi
+
   if $use_cmux; then
     # wtp add（パイプで非TTYにしてcdを抑制）
-    wtp add -b "$branch" "$base" | cat
+    wtp "${wtp_add_args[@]}" | cat
 
     command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
     local cwd workspace_name cmd
@@ -164,7 +182,7 @@ except subprocess.TimeoutExpired:
     fi
   else
     # wtp add でworktree作成＋cd
-    wtp add -b "$branch" "$base"
+    wtp "${wtp_add_args[@]}"
 
     # 起動
     if [[ -n "$launch" ]]; then
