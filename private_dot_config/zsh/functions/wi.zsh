@@ -155,20 +155,28 @@ except subprocess.TimeoutExpired:
     wtp "${wtp_add_args[@]}" | cat
 
     command -v cmux >/dev/null 2>&1 || { echo "ERROR: cmux not found in PATH" >&2; return 1; }
-    local cwd workspace_name cmd
-    cwd="$(wtp cd "$branch")" || return 1
+    local cwd workspace_name cmd wtp_cwd_raw
+    wtp_cwd_raw="$(command wtp cd "$branch")" || return 1
+    cwd="$(printf '%s\n' "$wtp_cwd_raw" | tr -d '\r' | awk 'NR == 1 { print; exit }')"
+    if [[ -z "$cwd" ]]; then
+      echo "ERROR: command wtp cd returned empty path for branch: $branch" >&2
+      return 1
+    fi
+    if [[ -n "${WI_DEBUG:-}" ]]; then
+      echo "DEBUG: wi cmux cwd: $cwd" >&2
+    fi
     workspace_name="${title:-$branch}"
     local -a cmux_args
     cmux_args=(new-workspace --cwd "$cwd" --name "$workspace_name")
+    local launch_cmd=""
     if [[ -n "$launch" ]]; then
-      cmd="$launch"
+      launch_cmd="$launch"
       if [[ "$launch" == "codex" ]]; then
-        cmd="$cmd --full-auto"
+        launch_cmd="$launch_cmd --full-auto"
       fi
       if [[ -n "$prompt" ]]; then
-        cmd="$cmd $(printf '%q' "$prompt")"
+        launch_cmd="$launch_cmd $(printf '%q' "$prompt")"
       fi
-      cmux_args+=(--command "$cmd")
     fi
     local ws
     ws=$(cmux "${cmux_args[@]}" 2>/dev/null | awk '{print $2}')
@@ -177,8 +185,27 @@ except subprocess.TimeoutExpired:
       return 1
     fi
     echo "cmux  : $ws"
+    if [[ -n "${WI_DEBUG:-}" ]]; then
+      echo "DEBUG: wi cmux workspace: $ws" >&2
+    fi
     if ! cmux workspace-action --workspace "$ws" --action set-color --color Teal 2>/dev/null; then
       echo "WARN: failed to set cmux workspace color: $ws" >&2
+    fi
+    if [[ -n "$launch_cmd" ]]; then
+      local surface
+      surface="$(cmux list-pane-surfaces --workspace "$ws" 2>/dev/null | awk '{for (i=1;i<=NF;i++) if ($i ~ /^surface:/) {print $i; exit}}')"
+      if [[ -z "$surface" ]]; then
+        echo "ERROR: failed to resolve cmux surface for workspace: $ws" >&2
+        return 1
+      fi
+      if [[ -n "${WI_DEBUG:-}" ]]; then
+        echo "DEBUG: wi cmux surface: $surface" >&2
+        echo "DEBUG: wi cmux launch: $launch_cmd" >&2
+      fi
+      if ! cmux respawn-pane --workspace "$ws" --surface "$surface" --command "$launch_cmd" 2>/dev/null; then
+        echo "ERROR: failed to launch command in cmux workspace: $ws" >&2
+        return 1
+      fi
     fi
   else
     # wtp add でworktree作成＋cd
