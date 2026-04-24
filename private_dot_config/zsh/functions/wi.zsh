@@ -171,9 +171,6 @@ except subprocess.TimeoutExpired:
     local launch_cmd=""
     if [[ -n "$launch" ]]; then
       launch_cmd="$launch"
-      if [[ "$launch" == "codex" ]]; then
-        launch_cmd="$launch_cmd --full-auto"
-      fi
       if [[ -n "$prompt" ]]; then
         launch_cmd="$launch_cmd $(printf '%q' "$prompt")"
       fi
