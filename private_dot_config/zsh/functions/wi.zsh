@@ -208,6 +208,38 @@ except subprocess.TimeoutExpired:
     # wtp add でworktree作成＋cd
     wtp "${wtp_add_args[@]}"
 
+    # cmux 内にいる場合は、現在の workspace に title/color を整える（未設定時のみ）
+    if command -v cmux >/dev/null 2>&1; then
+      local cur_ws cur_title cur_color rpc_out workspace_name
+      cur_ws="$(cmux current-workspace 2>/dev/null | tr -d '\r' | head -n1)"
+      if [[ -n "$cur_ws" ]]; then
+        workspace_name="${title:-$branch}"
+        rpc_out="$(cmux rpc workspace.current 2>/dev/null | python3 -c 'import json, sys
+try:
+    d = json.load(sys.stdin).get("workspace", {}) or {}
+    print((d.get("title") or "") + "\t" + (d.get("custom_color") or ""))
+except Exception:
+    pass
+')"
+        cur_title="${rpc_out%%$'\t'*}"
+        cur_color="${rpc_out#*$'\t'}"
+        if [[ -z "$cur_title" && -n "$workspace_name" ]]; then
+          if cmux rename-workspace --workspace "$cur_ws" "$workspace_name" >/dev/null 2>&1; then
+            echo "cmux  : title=$workspace_name ($cur_ws)"
+          else
+            echo "WARN: failed to set cmux workspace title: $cur_ws" >&2
+          fi
+        fi
+        if [[ -z "$cur_color" ]]; then
+          if cmux workspace-action --workspace "$cur_ws" --action set-color --color Teal >/dev/null 2>&1; then
+            echo "cmux  : color=Teal ($cur_ws)"
+          else
+            echo "WARN: failed to set cmux workspace color: $cur_ws" >&2
+          fi
+        fi
+      fi
+    fi
+
     # 起動
     if [[ -n "$launch" ]]; then
       if [[ -n "$prompt" ]]; then
