@@ -182,11 +182,14 @@ except subprocess.TimeoutExpired:
       return 1
     fi
     echo "cmux  : $ws"
+    echo "cmux  : title=$workspace_name ($ws)"
     if [[ -n "${WI_DEBUG:-}" ]]; then
       echo "DEBUG: wi cmux workspace: $ws" >&2
     fi
     if ! cmux workspace-action --workspace "$ws" --action set-color --color Teal 2>/dev/null; then
       echo "WARN: failed to set cmux workspace color: $ws" >&2
+    else
+      echo "cmux  : color=Teal ($ws)"
     fi
     if [[ -n "$launch_cmd" ]]; then
       local surface
@@ -229,6 +232,8 @@ except Exception:
           else
             echo "WARN: failed to set cmux workspace title: $cur_ws" >&2
           fi
+        elif [[ -n "$cur_title" ]]; then
+          echo "cmux  : title=$cur_title (already set, $cur_ws)"
         fi
         if [[ -z "$cur_color" ]]; then
           if cmux workspace-action --workspace "$cur_ws" --action set-color --color Teal >/dev/null 2>&1; then
@@ -236,6 +241,8 @@ except Exception:
           else
             echo "WARN: failed to set cmux workspace color: $cur_ws" >&2
           fi
+        else
+          echo "cmux  : color=$cur_color (already set, $cur_ws)"
         fi
       fi
     fi
