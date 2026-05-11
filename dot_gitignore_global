@@ -52,3 +52,4 @@ AGENTS.override.md
 .twig/
 .takt/.gitignore
 .worktreelinks
+.playwright/cli.config.json
