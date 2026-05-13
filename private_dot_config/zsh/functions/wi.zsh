@@ -261,12 +261,38 @@ except Exception:
 wi-rm() {
   local -a rm_opts
   rm_opts=()
+  local remove_current=false
   while (( $# )); do
     case "$1" in
       -f|--force) rm_opts+=(--force); shift ;;
+      -c|--current) remove_current=true; shift ;;
       *) echo "Unknown flag: $1" >&2; return 1 ;;
     esac
   done
+
+  if $remove_current; then
+    local current_wt main_wt wt_name
+    current_wt="$(git rev-parse --show-toplevel 2>/dev/null)"
+    if [[ -z "$current_wt" ]]; then
+      echo "ERROR: not inside a git worktree" >&2
+      return 1
+    fi
+    main_wt="$(git worktree list --porcelain | awk '/^worktree / {sub(/^worktree /, ""); print; exit}')"
+    if [[ -z "$main_wt" ]]; then
+      echo "ERROR: failed to detect main worktree" >&2
+      return 1
+    fi
+    if [[ "$current_wt" == "$main_wt" ]]; then
+      echo "ERROR: refusing to remove the main worktree: $current_wt" >&2
+      return 1
+    fi
+    wt_name="${current_wt##*/}"
+    cd "$main_wt" || { echo "ERROR: failed to cd to main worktree: $main_wt" >&2; return 1; }
+    echo "moved to: $main_wt"
+    git worktree remove "${rm_opts[@]}" "$current_wt" \
+      && echo "Removed worktree: $wt_name"
+    return $?
+  fi
 
   local selected
   selected=$(git worktree list | fzf -m) || return
