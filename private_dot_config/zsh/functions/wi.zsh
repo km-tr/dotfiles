@@ -83,7 +83,7 @@ wi() {
 
     local rules_file="$HOME/docs/branch.md"
     [[ -f "$rules_file" ]] || { echo "ERROR: rules file not found: $rules_file" >&2; return 1; }
-    command -v llm >/dev/null 2>&1 || { echo "ERROR: 'llm' not found. Install with: pipx install llm" >&2; return 1; }
+    command -v llm >/dev/null 2>&1 || { echo "ERROR: 'llm' not found. Install with: pipx install llm && llm install llm-openrouter && llm keys set openrouter" >&2; return 1; }
 
     local rules out slug
     rules="$(cat "$rules_file")"
@@ -99,7 +99,7 @@ try:
     raise SystemExit(subprocess.run(cmd, timeout=timeout).returncode)
 except subprocess.TimeoutExpired:
     raise SystemExit(124)
-' "${WI_LLM_TIMEOUT_SECONDS:-15}" llm -m gemini-flash-latest -s "Output only: branch name, excluding ブランチマン" \
+' "${WI_LLM_TIMEOUT_SECONDS:-15}" llm -m "${WI_LLM_MODEL:-openrouter/google/gemini-2.5-flash-lite}" -s "Output only: branch name, excluding ブランチマン" \
     )"
     local llm_status=$?
     if [[ "$llm_status" -eq 124 ]]; then
