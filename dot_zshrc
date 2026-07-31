@@ -79,3 +79,15 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-clou
 
 
 
+
+# Added by Devin
+export PATH="/Users/kmtr/.codeium/windsurf/bin:$PATH"
+
+# bun completions
+[ -s "/Users/kmtr/.bun/_bun" ] && source "/Users/kmtr/.bun/_bun"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
