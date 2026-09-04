@@ -34,6 +34,7 @@ memory-bank
 .claude/*/*-local
 .claude/scheduled_tasks.lock
 .claude/works
+.claude/.cc-writes/
 .agents/*/local
 .agents/*/*-local
 docs/local
