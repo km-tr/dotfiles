@@ -53,3 +53,4 @@ AGENTS.override.md
 .takt/.gitignore
 .worktreelinks
 .playwright/cli.config.json
+.pi/tasks/
