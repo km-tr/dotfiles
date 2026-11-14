@@ -66,8 +66,6 @@ alias cm='chezmoi'
 alias brwe="brew"
 alias bbd="brew bundle dump --global --force"
 
-alias lg="lazygit"
-
 alias cmux='/usr/local/bin/cmux'
 alias cch='cmux close-workspace --workspace "$(cmux identify --json | jq -r .caller.workspace_ref)"'
 
