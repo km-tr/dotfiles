@@ -66,9 +66,6 @@ alias cm='chezmoi'
 alias brwe="brew"
 alias bbd="brew bundle dump --global --force"
 
-alias cmux='/usr/local/bin/cmux'
-alias cch='cmux close-workspace --workspace "$(cmux identify --json | jq -r .caller.workspace_ref)"'
-
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # The next line updates PATH for the Google Cloud SDK.
