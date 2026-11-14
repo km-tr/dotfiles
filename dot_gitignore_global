@@ -55,3 +55,4 @@ AGENTS.override.md
 .worktreelinks
 .playwright/cli.config.json
 .pi/tasks/
+**/.claude/settings.local.json
