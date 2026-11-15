@@ -1,12 +1,6 @@
 tap "708u/tap"
-tap "hashicorp/tap"
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "km-tr/tap"
-tap "manaflow-ai/cmux"
-tap "microsoft/apm"
 tap "olets/tap"
-tap "productdevbook/tap"
 tap "stablyai/orca"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
