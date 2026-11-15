@@ -20,7 +20,6 @@ path+=($BUNPATH/bin)
 
 path+=$HOME/.local/bin
 
-path+=/opt/homebrew/opt/protobuf@3/bin
 path+=/opt/homebrew/opt/postgresql@15/bin
 
 # grok CLI の補完は compinit (sheldon) より前に fpath へ追加する
@@ -65,7 +64,7 @@ alias gcmrv='git commit -m "revert:'
 alias cm='chezmoi'
 
 alias brwe="brew"
-alias bbd="brew bundle dump --global --force"
+alias bbd="brew bundle dump --global --force --tap --formula --cask --mas --cargo --uv --go"
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 

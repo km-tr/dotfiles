@@ -98,8 +98,6 @@ brew "pkgconf"
 brew "poppler"
 # Object-relational database system
 brew "postgresql@15", restart_service: :changed
-# Protocol buffers (Google's data interchange format)
-brew "protobuf@3"
 # Persistent key-value database, with built-in net interface
 brew "redis"
 # SVG rendering tool and library
@@ -122,7 +120,9 @@ brew "uv"
 brew "watchman"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Automatically create symlinks from a main worktree to a new worktree based on .worktreelinks patterns
 brew "km-tr/tap/worktree-link", trusted: true
+# Auto-expanding abbreviations manager for zsh, inspired by fish
 brew "olets/tap/zsh-abbr", trusted: true
 # Tools for building Android applications
 cask "android-studio"
@@ -161,7 +161,6 @@ cask "708u/tap/twig", trusted: true
 cask "zulu@17"
 mas "Bitwarden", id: 1352778147
 mas "Tailscale", id: 1475387142
-go "github.com/twitchtv/twirp-ruby/protoc-gen-twirp_ruby"
 cargo "cargo-audit"
 cargo "cargo-dist"
 cargo "cargo-release"
