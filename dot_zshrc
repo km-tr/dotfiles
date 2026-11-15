@@ -1,4 +1,6 @@
 # environment variables
+typeset -U path fpath
+
 export EDITOR=vim
 
 export HISTSIZE=10000
@@ -21,7 +23,8 @@ path+=$HOME/.local/bin
 path+=/opt/homebrew/opt/protobuf@3/bin
 path+=/opt/homebrew/opt/postgresql@15/bin
 
-path+=$HOME/.lmstudio/bin
+# grok CLI の補完は compinit (sheldon) より前に fpath へ追加する
+fpath=(~/.grok/completions/zsh $fpath)
 
 # eval
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -74,20 +77,8 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-
-
-
-# Added by Devin
-export PATH="/Users/kmtr/.codeium/windsurf/bin:$PATH"
-
 # bun completions
 [ -s "/Users/kmtr/.bun/_bun" ] && source "/Users/kmtr/.bun/_bun"
-
-# >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
 
 # Added by Kiri: its docker and kiri commands (kiri setup --uninstall removes this)
 case ":$PATH:" in *":$HOME/.kiri/bin:"*) ;; *) export PATH="$PATH:$HOME/.kiri/bin" ;; esac
