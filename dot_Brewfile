@@ -130,8 +130,6 @@ cask "android-studio"
 cask "claude"
 # Screen capturing tool
 cask "cleanshot"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
