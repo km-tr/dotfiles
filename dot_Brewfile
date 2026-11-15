@@ -1,5 +1,4 @@
 tap "708u/tap"
-tap "coderabbitai/tap"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
@@ -8,9 +7,7 @@ tap "manaflow-ai/cmux"
 tap "microsoft/apm"
 tap "olets/tap"
 tap "productdevbook/tap"
-tap "satococoa/tap"
 tap "stablyai/orca"
-tap "steipete/tap"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
 # Smooth out the rough edges of AWS SSO (temporarily, until AWS makes it better)
@@ -67,8 +64,6 @@ brew "gnutls"
 brew "go"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Agent multiplexer that lives in your terminal
-brew "herdr"
 # Command-line benchmarking tool
 brew "hyperfine"
 # DevTools proxy for iOS devices
@@ -89,8 +84,6 @@ brew "libpq"
 brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
-# Access large language models from the command-line
-brew "llm"
 # Mac App Store command-line interface
 brew "mas"
 # Yet another part-of-speech and morphological analyzer
@@ -101,10 +94,6 @@ brew "mecab-ipadic"
 brew "mise"
 # Deep clean and optimize your Mac
 brew "mole"
-# Create, run, and share large language models (LLMs)
-brew "ollama"
-# Pins GitHub Actions to full hashes and versions
-brew "pinact"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Package compiler and linker metadata toolkit
@@ -137,10 +126,8 @@ brew "uv"
 brew "watchman"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-brew "coderabbitai/tap/git-gtr", trusted: true
 brew "km-tr/tap/worktree-link", trusted: true
 brew "olets/tap/zsh-abbr", trusted: true
-brew "satococoa/tap/wtp", trusted: true
 # Tools for building Android applications
 cask "android-studio"
 cask "cctidy"
@@ -148,9 +135,6 @@ cask "cctidy"
 cask "claude"
 # Screen capturing tool
 cask "cleanshot"
-cask "codexbar"
-# Brings the power of Copilot coding agent directly to your terminal
-cask "copilot-cli"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 cask "font-jetbrains-mono"
@@ -164,8 +148,6 @@ cask "google-chrome"
 cask "google-japanese-ime"
 # Keyboard customiser
 cask "karabiner-elements"
-# Reverse proxy, secure introspectable tunnels to localhost
-cask "ngrok"
 # Replacement for Docker Desktop
 cask "orbstack"
 # IDE for orchestrating AI coding agents across terminals and worktrees
