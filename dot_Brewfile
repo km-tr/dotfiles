@@ -1,108 +1,195 @@
 tap "708u/tap"
 tap "coderabbitai/tap"
+tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "km-tr/tap"
 tap "manaflow-ai/cmux"
+tap "microsoft/apm"
 tap "olets/tap"
 tap "productdevbook/tap"
 tap "satococoa/tap"
+tap "stablyai/orca"
 tap "steipete/tap"
-brew "webp"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
+# Smooth out the rough edges of AWS SSO (temporarily, until AWS makes it better)
 brew "aws-sso-util"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Secrets scanner built for configurability and speed
+brew "betterleaks"
+# Breadth-first version of find
+brew "bfs"
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Secure and free password manager for all of your devices
 brew "bitwarden-cli"
+# Core application library for C
 brew "glib"
+# Vector graphics library with cross-device output support
 brew "cairo"
+# Next-generation test runner for Rust
+brew "cargo-nextest"
+# Object-file caching compiler wrapper
 brew "ccache"
+# Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Cloudflare Tunnel client (formerly Argo Tunnel)
 brew "cloudflared"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Git extension for versioning large files
 brew "git-lfs"
+# GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# OpenType text shaping engine
 brew "harfbuzz"
-brew "pango"
-brew "librsvg"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# Command-line benchmarking tool
 brew "hyperfine"
+# DevTools proxy for iOS devices
+brew "ios-webkit-debug-proxy"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
+brew "just"
+# Kubernetes command-line interface
 brew "kubernetes-cli"
+# Subtitle renderer for the ASS/SSA subtitle format
 brew "libass"
+# Light HTTP/1.1 server library
 brew "libmicrohttpd"
+# Postgres C API library
 brew "libpq"
+# Framework for layout and rendering of i18n text
+brew "pango"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Access large language models from the command-line
 brew "llm"
+# Mac App Store command-line interface
 brew "mas"
+# Yet another part-of-speech and morphological analyzer
 brew "mecab"
+# IPA dictionary compiled for MeCab
 brew "mecab-ipadic"
+# Polyglot runtime manager (asdf rust clone)
 brew "mise"
-brew "ollama", restart_service: :changed
+# Deep clean and optimize your Mac
+brew "mole"
+# Create, run, and share large language models (LLMs)
+brew "ollama"
+# Pins GitHub Actions to full hashes and versions
+brew "pinact"
+# Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Package compiler and linker metadata toolkit
 brew "pkgconf"
+# PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
-brew "postgresql@15"
+# Object-relational database system
+brew "postgresql@15", restart_service: :changed
+# Protocol buffers (Google's data interchange format)
 brew "protobuf@3"
+# Persistent key-value database, with built-in net interface
+brew "redis"
+# SVG rendering tool and library
 brew "resvg"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Utility that provides fast incremental file transfer
 brew "rsync"
-brew "sentry-cli"
+# Used as a compiler wrapper and avoids compilation when possible
+brew "sccache"
+# Fast, configurable, shell plugin manager
 brew "sheldon"
+# Text interface for Git repositories
 brew "tig"
+# Terminal multiplexer
 brew "tmux"
+# Ultra fast grep with query UI, fuzzy search, archive search, and more
+brew "ugrep"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Watch files and take action when they change
 brew "watchman"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
-brew "coderabbitai/tap/git-gtr"
-brew "km-tr/tap/worktree-link"
-brew "olets/tap/zsh-abbr"
-brew "satococoa/tap/wtp"
-cask "android-platform-tools"
+brew "coderabbitai/tap/git-gtr", trusted: true
+brew "km-tr/tap/worktree-link", trusted: true
+brew "olets/tap/zsh-abbr", trusted: true
+brew "satococoa/tap/wtp", trusted: true
+# Tools for building Android applications
 cask "android-studio"
-cask "708u/tap/cctidy"
+cask "cctidy"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Screen capturing tool
 cask "cleanshot"
-cask "manaflow-ai/cmux/cmux"
-cask "steipete/tap/codexbar"
+cask "codexbar"
+# Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
+# Write, edit, and chat about your code with AI
 cask "cursor"
-cask "figma"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Web browser
 cask "google-chrome"
+# Japanese input software
 cask "google-japanese-ime"
-cask "iterm2"
+# Keyboard customiser
 cask "karabiner-elements"
-cask "microsoft-edge"
+# Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
-cask "notion"
+# Replacement for Docker Desktop
 cask "orbstack"
-cask "productdevbook/tap/portkiller"
-cask "postman"
+# IDE for orchestrating AI coding agents across terminals and worktrees
+cask "stablyai/orca/orca", trusted: true
+# Control your tools with a few keystrokes
 cask "raycast"
-cask "rectangle"
+# Team communication and collaboration software
 cask "slack"
-cask "tableplus"
-cask "708u/tap/twig"
-cask "warp"
-cask "wezterm"
-cask "zed"
-cask "zoom"
+# System monitor for the menu bar
+cask "stats"
+# Text editor for code, markup and prose
+cask "sublime-text"
+# Simplify git worktree workflows with automatic branch creation, symlinks, and change syncing
+cask "708u/tap/twig", trusted: true
+# OpenJDK distribution from Azul
 cask "zulu@17"
 mas "Bitwarden", id: 1352778147
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
 mas "Tailscale", id: 1475387142
+go "github.com/twitchtv/twirp-ruby/protoc-gen-twirp_ruby"
+cargo "cargo-audit"
 cargo "cargo-dist"
 cargo "cargo-release"
+cargo "cargo-watch"
+cargo "systemfd"
+uv "it2"
