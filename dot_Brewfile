@@ -18,10 +18,6 @@ brew "awscli"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Secrets scanner built for configurability and speed
-brew "betterleaks"
-# Breadth-first version of find
-brew "bfs"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Secure and free password manager for all of your devices
@@ -130,7 +126,6 @@ brew "km-tr/tap/worktree-link", trusted: true
 brew "olets/tap/zsh-abbr", trusted: true
 # Tools for building Android applications
 cask "android-studio"
-cask "cctidy"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Screen capturing tool
@@ -172,4 +167,3 @@ cargo "cargo-dist"
 cargo "cargo-release"
 cargo "cargo-watch"
 cargo "systemfd"
-uv "it2"
