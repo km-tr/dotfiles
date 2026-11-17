@@ -1,0 +1,13 @@
+[bootstrap.repos."~/hoge/ai-config"]
+url = "https://github.com/km-tr/ai-config.git"
+
+[bootstrap.repos."~/docs"]
+url = "https://github.com/km-tr/docs.git"
+
+[dotfiles]
+"~/.claude/CLAUDE.md" = { source = "~/hoge/ai-config/.agents/CLAUDE.md", mode = "symlink" }
+"~/.codex/AGENTS.md" = { source = "~/hoge/ai-config/.agents/CLAUDE.md", mode = "symlink" }
+"~/.agents/bin" = { source = "~/hoge/ai-config/.agents/bin", mode = "symlink" }
+"~/.agents/skills" = { source = "~/hoge/ai-config/.agents/skills", mode = "symlink" }
+"~/.agents/hooks" = { source = "~/hoge/ai-config/.agents/hooks", mode = "symlink" }
+"~/.claude/skills" = { source = "~/.agents/skills", mode = "symlink" }
