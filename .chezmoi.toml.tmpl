@@ -1,7 +1,7 @@
 [git]
 autoCommit = true
+{{ if eq .chezmoi.os "darwin" -}}
 [edit]
 args = ["--wait", "-n"]
 command = "cursor"
-[bitwarden]
-unlock = "auto"
+{{- end }}
