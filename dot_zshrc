@@ -26,19 +26,24 @@ path+=/opt/homebrew/opt/postgresql@15/bin
 fpath=(~/.grok/completions/zsh $fpath)
 
 # eval
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# mise の brew: は Homebrew 本体なしでも /opt/homebrew に入れるので、本体がなければ PATH だけ足す
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -d /opt/homebrew/bin ]]; then
+  path=(/opt/homebrew/bin /opt/homebrew/sbin $path)
+fi
 
-[[ "$COMPOSER_NO_INTERACTION" != "1" ]] && eval "$(sheldon source)"
+(( $+commands[sheldon] )) && [[ "$COMPOSER_NO_INTERACTION" != "1" ]] && eval "$(sheldon source)"
 
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
 
-eval "$(zoxide init zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
-source <(fzf --zsh)
+(( $+commands[fzf] )) && source <(fzf --zsh)
 
-source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+[[ -f /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh ]] && source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
-eval "$(twig completion zsh)"
+(( $+commands[twig] )) && eval "$(twig completion zsh)"
 
 # bindkey
 bindkey '^[[A' history-substring-search-up
@@ -66,7 +71,7 @@ alias cm='chezmoi'
 alias brwe="brew"
 alias bbd="brew bundle dump --global --force --tap --formula --cask --mas --cargo --uv --go"
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+[[ -d /Applications/Tailscale.app ]] && alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
@@ -75,7 +80,7 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 # bun completions
-[ -s "/Users/kmtr/.bun/_bun" ] && source "/Users/kmtr/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Added by Kiri: its docker and kiri commands (kiri setup --uninstall removes this)
 case ":$PATH:" in *":$HOME/.kiri/bin:"*) ;; *) export PATH="$PATH:$HOME/.kiri/bin" ;; esac
