@@ -1,9 +1,6 @@
 [user]
 	name = km-tr
 	email = kumagai@bear.tokyo
-	signingkey = "{{ (bitwarden "item" "github-signingkey").notes }}"
-[url "git@github.com:"]
-	pushInsteadOf = "https://github.com/"
 [core]
 	excludesFile = ~/.gitignore_global
 	editor = vim
@@ -14,8 +11,6 @@
 	autosquash = true
 	autostash = true
 	updateRefs = true
-[commit]
-	gpgsign = true
 [color]
   ui = auto
 [fetch]
@@ -37,3 +32,9 @@
 	enabled = true
 [remote]
 	default = origin
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+# 署名鍵と SSH の push はマシンごとに置く (chezmoi 管理外)
+[include]
+	path = ~/.gitconfig.local
