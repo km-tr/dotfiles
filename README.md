@@ -58,8 +58,6 @@ claude plugin marketplace add ~/hoge/ai-config
 claude plugin install kmtr-hooks@ai-config
 ```
 
-WorktreeCreate / WorktreeRemove の hook だけは、mise bootstrap が `~/.claude/settings.json` に書き込む。
-
 ### 5. SSH 鍵と署名を設定する
 
 GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH エージェントを使い）、`~/.gitconfig.local` を作る。このファイルは chezmoi で管理しない。

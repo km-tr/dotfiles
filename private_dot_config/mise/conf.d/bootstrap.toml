@@ -13,4 +13,3 @@ url = "https://github.com/km-tr/docs.git"
 "~/.claude/skills" = { source = "~/.agents/skills", mode = "symlink" }
 "~/.codex/hooks.json" = { source = "~/hoge/ai-config/.agents/hooks/codex-hooks.json", mode = "symlink" }
 "~/.pi/agent/extensions/pi-hooks.ts" = { source = "~/hoge/ai-config/.agents/hooks/pi-hooks.ts", mode = "symlink" }
-"~/.claude/settings.json/worktree" = { source = "~/hoge/ai-config/claude/settings.worktree.json", merge = true }
