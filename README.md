@@ -49,7 +49,14 @@ gh auth login --web --git-protocol https
 mise bootstrap --skip-dirty
 ```
 
-`~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る。`--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
+`~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る。Claude Code の自作 hooks は ai-config の plugin なので、続けて次を実行する。
+
+```sh
+claude plugin marketplace add ~/hoge/ai-config
+claude plugin install kmtr-hooks@ai-config
+```
+
+WorktreeCreate / WorktreeRemove の hook だけは、mise bootstrap が `~/.claude/settings.json` に書き込む。`--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
 
 ### 5. SSH 鍵と署名を設定する
 
