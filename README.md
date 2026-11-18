@@ -16,12 +16,13 @@
 
 ### 1. chezmoi で設定ファイルを配置する
 
-Homebrew がまだないので、chezmoi は公式のスクリプトで `~/.local/bin` に入れる。リポジトリは public なので認証はいらない。
+Homebrew がまだないので、公式スクリプトで取得した chezmoi を一度だけ実行する。`--purge-binary` で実行後にその本体を消し、常用する chezmoi は次の手順で Brewfile から入れる。リポジトリは public なので認証はいらない。
 
 ```sh
-sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin"
-"$HOME/.local/bin/chezmoi" init --apply km-tr
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply --purge-binary km-tr
 ```
+
+ソース（`~/.local/share/chezmoi`）と設定は残るので、以後は Homebrew の chezmoi で `chezmoi update` などを使える。
 
 ### 2. Homebrew と Brewfile のパッケージを入れる
 
