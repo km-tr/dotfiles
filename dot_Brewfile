@@ -1,4 +1,5 @@
 tap "708u/tap"
+tap "appandflow/tap"
 tap "km-tr/tap"
 tap "olets/tap"
 tap "stablyai/orca"
@@ -135,8 +136,6 @@ cask "google-chrome"
 cask "google-japanese-ime"
 # Keyboard customiser
 cask "karabiner-elements"
-# Replacement for Docker Desktop
-cask "orbstack"
 # IDE for orchestrating AI coding agents across terminals and worktrees
 cask "stablyai/orca/orca", trusted: true
 # Control your tools with a few keystrokes
@@ -145,6 +144,8 @@ cask "raycast"
 cask "slack"
 # System monitor for the menu bar
 cask "stats"
+# Watch and control the simulators and emulators Stim runs
+cask "appandflow/tap/stim", trusted: true
 # Text editor for code, markup and prose
 cask "sublime-text"
 # Simplify git worktree workflows with automatic branch creation, symlinks, and change syncing
