@@ -12,5 +12,4 @@ url = "https://github.com/km-tr/docs.git"
 "~/.agents/hooks" = { source = "~/hoge/ai-config/.agents/hooks", mode = "symlink" }
 "~/.claude/skills" = { source = "~/.agents/skills", mode = "symlink" }
 "~/.codex/agents" = { source = "~/hoge/ai-config/.codex/agents", mode = "symlink-each" }
-"~/.codex/hooks.json" = { source = "~/hoge/ai-config/.agents/hooks/codex-hooks.json", mode = "symlink" }
 "~/.pi/agent/extensions/pi-hooks.ts" = { source = "~/hoge/ai-config/.agents/hooks/pi-hooks.ts", mode = "symlink" }
