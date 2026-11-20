@@ -51,13 +51,14 @@ mise bootstrap --skip-dirty
 
 `~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る。`--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
 
-Claude Code と Codex の自作 hooks は ai-config の plugin なので、続けて次を実行する。
+Claude Code・Codex・Pi の自作 hooks は ai-config の plugin（Pi は package）なので、続けて次を実行する。
 
 ```sh
 claude plugin marketplace add ~/hoge/ai-config
 claude plugin install kmtr-hooks@ai-config
 codex plugin marketplace add ~/hoge/ai-config
 codex plugin add kmtr-codex-hooks@ai-config
+pi install ~/hoge/ai-config/pi
 ```
 
 Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する。
