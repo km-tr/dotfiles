@@ -92,6 +92,19 @@ curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin"
 
 `reason` と `ara` は Reason アプリが置くリンクなので、アプリを入れれば揃う。
 
+bun のグローバルパッケージのうち次の8つは mise に移せないので、bun で入れる。ほかの npm の CLI は mise の `config.toml` にある。
+
+```sh
+bun add -g @openai/codex @reason-machines/cli @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel
+```
+
+| 理由 | パッケージ |
+|---|---|
+| 自動更新の LaunchAgent（`codex-update`）が bun で更新する | codex |
+| mise の npm はインストール後のスクリプトを実行せず、動かない（または遅くなる） | reason, opencode-ai, agent-desktop |
+| 週のダウンロード数が少なく、mise の npm が安全確認で拒否する | ncli, figma-reader |
+| mise の npm で依存関係を解決できない | lighthouse, vercel |
+
 自作の LaunchAgent は ai-config の `launchd/` にあり、手順は ai-config の README に書いてある。
 
 ### 5. SSH 鍵と署名を設定する
