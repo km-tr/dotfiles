@@ -79,6 +79,21 @@ pi install npm:@dietrichgebert/ponytail
 
 claude.ai の組織から配布される plugin は、この一覧に含めない。
 
+公式のインストーラーで `~/.local/bin` に入る CLI も、Brewfile と mise の外なので手で入れる。
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash             # claude
+curl https://cursor.com/install -fsS | bash                # cursor-agent
+curl -fsSL https://cli.devin.ai/install.sh | bash          # devin
+curl -fsSL https://x.ai/cli/install.sh | bash              # grok（~/.grok/bin）
+curl -fsSL https://cli.coderabbit.ai/install.sh | sh       # coderabbit, cr
+curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh  # blacksmith
+```
+
+`reason` と `ara` は Reason アプリが置くリンクなので、アプリを入れれば揃う。
+
+自作の LaunchAgent は ai-config の `launchd/` にあり、手順は ai-config の README に書いてある。
+
 ### 5. SSH 鍵と署名を設定する
 
 GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH エージェントを使い）、`~/.gitconfig.local` を作る。このファイルは chezmoi で管理しない。
