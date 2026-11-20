@@ -7,7 +7,7 @@
 | `.zshrc`、`.gitconfig`、`.Brewfile`、mise の設定 | chezmoi（このリポジトリ） |
 | CLI、アプリ、App Store アプリ | Homebrew（`~/.Brewfile`） |
 | 版を固定する開発ツール（Node、Bun、pnpm、APM） | mise（`~/.config/mise/config.toml`） |
-| ai-config と docs の取得、AI 設定の symlink | mise bootstrap（`~/.config/mise/conf.d/bootstrap.toml`） |
+| Homebrew の導入、ai-config と docs の取得、AI 設定の symlink、plugin と LaunchAgent | mise bootstrap（`~/.config/mise/conf.d/bootstrap.toml`） |
 | 署名鍵と SSH の push | マシンごとの `~/.gitconfig.local`（管理外） |
 
 ## 新しい Mac での初回セットアップ
@@ -24,79 +24,36 @@ sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply --purge-binary km-t
 
 ソース（`~/.local/share/chezmoi`）と設定は残るので、以後は Homebrew の chezmoi で `chezmoi update` などを使える。
 
-### 2. Homebrew と Brewfile のパッケージを入れる
+### 2. mise bootstrap で残りをまとめて入れる
 
-途中で管理者パスワードを聞かれる。
-
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-brew bundle --global
-```
-
-### 3. 開発ツールを入れて GitHub にログインする
+mise も Brewfile から入れるので、公式スクリプトの mise で bootstrap を一度だけ実行し、終わったら消す。途中で管理者パスワードと gh のブラウザでのログインを聞かれる。
 
 ```sh
-mise install
-gh auth login --web --git-protocol https
+curl https://mise.run | sh
+~/.local/bin/mise bootstrap --skip-dirty
+rm ~/.local/bin/mise
 ```
 
-`.gitconfig` は GitHub への HTTPS 接続で `gh auth git-credential` を使う。gh にログインすると、private リポジトリも clone できるようになる。
+`~/.config/mise/conf.d/bootstrap.toml` に従って、次を順に行う。何度実行しても、足りないものだけを入れる。
 
-### 4. ai-config と docs を取得し、AI 設定を配置する
+1. Homebrew を入れ、Brewfile のうち入っていないものを入れる（既存のパッケージは更新しない）。gh にログインする
+2. `~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る
+3. `config.toml` の開発ツールと npm の CLI を入れる
+4. `bootstrap` タスクで、次を入れる
+   - 公式のインストーラーで入れる CLI（claude、cursor-agent、devin、grok、coderabbit、blacksmith）
+   - bun で入れる npm の CLI（下の表）
+   - Claude Code・Codex・Pi の自作 hooks（ai-config の plugin と package）と、外部の plugin・package（ponytail など）
+   - ai-config の `launchd/` にある自作の LaunchAgent
 
-```sh
-mise bootstrap --skip-dirty
-```
+`--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
 
-`~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る。`--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
+bootstrap の後に手で行うこと:
 
-Claude Code・Codex・Pi の自作 hooks は ai-config の plugin（Pi は package）なので、続けて次を実行する。
+- Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する
+- `reason` と `ara` は Reason アプリが置くリンクなので、アプリを入れて揃える
+- claude.ai の組織から配布される plugin は、claude.ai へのログインで入る
 
-```sh
-claude plugin marketplace add ~/hoge/ai-config
-claude plugin install kmtr-hooks@ai-config
-codex plugin marketplace add ~/hoge/ai-config
-codex plugin add kmtr-codex-hooks@ai-config
-pi install ~/hoge/ai-config/pi
-```
-
-Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する。
-
-外部の plugin と package は各ツールの設定ファイルにしか記録されないので、手で入れ直す。
-
-```sh
-claude plugin marketplace add DietrichGebert/ponytail
-claude plugin install ponytail@ponytail
-pi install npm:pi-web-access
-pi install npm:pi-background-tasks
-pi install npm:pi-subagents
-pi install npm:pi-sandbox
-pi install npm:@schultzp2020/pi-cursor
-pi install npm:@commandcode/pi-commandcode-provider
-pi install npm:@dietrichgebert/ponytail
-```
-
-claude.ai の組織から配布される plugin は、この一覧に含めない。
-
-公式のインストーラーで `~/.local/bin` に入る CLI も、Brewfile と mise の外なので手で入れる。
-
-```sh
-curl -fsSL https://claude.ai/install.sh | bash             # claude
-curl https://cursor.com/install -fsS | bash                # cursor-agent
-curl -fsSL https://cli.devin.ai/install.sh | bash          # devin
-curl -fsSL https://x.ai/cli/install.sh | bash              # grok（~/.grok/bin）
-curl -fsSL https://cli.coderabbit.ai/install.sh | sh       # coderabbit, cr
-curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh  # blacksmith
-```
-
-`reason` と `ara` は Reason アプリが置くリンクなので、アプリを入れれば揃う。
-
-bun のグローバルパッケージのうち次の8つは mise に移せないので、bun で入れる。ほかの npm の CLI は mise の `config.toml` にある。
-
-```sh
-bun add -g @openai/codex @reason-machines/cli @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel
-```
+npm の CLI のうち次の8つは mise の npm では入らないか動かないので、bun で入れている。
 
 | 理由 | パッケージ |
 |---|---|
@@ -105,9 +62,7 @@ bun add -g @openai/codex @reason-machines/cli @sakasegawa/ncli agent-desktop fig
 | 週のダウンロード数が少なく、mise の npm が安全確認で拒否する | ncli, figma-reader |
 | mise の npm で依存関係を解決できない | lighthouse, vercel |
 
-自作の LaunchAgent は ai-config の `launchd/` にあり、手順は ai-config の README に書いてある。
-
-### 5. SSH 鍵と署名を設定する
+### 3. SSH 鍵と署名を設定する
 
 GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH エージェントを使い）、`~/.gitconfig.local` を作る。このファイルは chezmoi で管理しない。
 
@@ -122,7 +77,7 @@ GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH
 
 このファイルがない間は、署名なしでコミットし、HTTPS（gh の認証）で push する。
 
-### 6. 確認する
+### 4. 確認する
 
 新しいターミナルを開いて、次を確かめる。
 
@@ -140,4 +95,4 @@ ls -l ~/.claude/CLAUDE.md       # ai-config への symlink
 | 別の Mac での変更を取り込む | `chezmoi update` |
 | アプリや CLI を入れた・消した後に Brewfile へ反映する | `bbd` の後に `chezmoi re-add ~/.Brewfile` してコミット |
 | Brewfile の内容をまとめて入れる | `brew bundle --global` |
-| ai-config と docs の取得、AI 設定の symlink | `mise bootstrap --skip-dirty` |
+| Brewfile の不足、ai-config と docs、symlink、plugin、LaunchAgent をまとめて揃える | `mise bootstrap --skip-dirty` |

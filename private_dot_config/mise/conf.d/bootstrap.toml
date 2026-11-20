@@ -12,3 +12,62 @@ url = "https://github.com/km-tr/docs.git"
 "~/.agents/hooks" = { source = "~/hoge/ai-config/.agents/hooks", mode = "symlink" }
 "~/.claude/skills" = { source = "~/.agents/skills", mode = "symlink" }
 "~/.codex/agents" = { source = "~/hoge/ai-config/.codex/agents", mode = "symlink-each" }
+
+# repos の clone より前に Homebrew・gh を揃え、private の docs を gh の認証で clone できるようにする
+[bootstrap.hooks.pre-repos]
+description = "Homebrew、Brewfile、gh のログイン"
+run = '''
+set -eu
+if [ ! -x /opt/homebrew/bin/brew ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# 足りないものだけ入れる。既存のパッケージの更新は bootstrap ではしない
+brew bundle check --global --no-upgrade >/dev/null || brew bundle install --global --no-upgrade
+gh auth status >/dev/null 2>&1 || gh auth login --web --git-protocol https
+'''
+
+# [tools] の bun が使えるよう、hook ではなく bootstrap タスクで実行する
+[tasks.bootstrap]
+description = "ai-config の LaunchAgent、各エージェントの plugin・package、mise 外の CLI"
+run = '''
+set -eu
+ai=~/hoge/ai-config
+
+[ -x ~/.local/bin/claude ] || curl -fsSL https://claude.ai/install.sh | bash
+[ -x ~/.local/bin/cursor-agent ] || curl https://cursor.com/install -fsS | bash
+[ -x ~/.local/bin/devin ] || curl -fsSL https://cli.devin.ai/install.sh | bash
+[ -x ~/.grok/bin/grok ] || curl -fsSL https://x.ai/cli/install.sh | bash
+[ -x ~/.local/bin/coderabbit ] || curl -fsSL https://cli.coderabbit.ai/install.sh | sh
+[ -x ~/.local/bin/blacksmith ] || curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh
+export PATH="$HOME/.local/bin:$PATH"
+
+# mise の npm では入らない、または動かないもの（理由は dotfiles の README）
+for p in @openai/codex @reason-machines/cli @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel; do
+  bun pm ls -g 2>/dev/null | grep -q " $p@" || bun add -g "$p"
+done
+
+claude plugin marketplace list | grep -q "Folder ($ai)" || claude plugin marketplace add "$ai"
+claude plugin list | grep -q 'kmtr-hooks@ai-config' || claude plugin install kmtr-hooks@ai-config
+claude plugin marketplace list | grep -q 'DietrichGebert/ponytail' || claude plugin marketplace add DietrichGebert/ponytail
+claude plugin list | grep -q 'ponytail@ponytail' || claude plugin install ponytail@ponytail
+
+grep -q '^\[marketplaces.ai-config\]' ~/.codex/config.toml 2>/dev/null || codex plugin marketplace add "$ai"
+grep -q '^\[plugins."kmtr-codex-hooks@ai-config"\]' ~/.codex/config.toml 2>/dev/null || codex plugin add kmtr-codex-hooks@ai-config
+
+pi list | grep -q "$ai/pi" || pi install "$ai/pi"
+for p in pi-web-access pi-background-tasks pi-subagents pi-sandbox @schultzp2020/pi-cursor @commandcode/pi-commandcode-provider @dietrichgebert/ponytail; do
+  pi list | grep -q "npm:$p\$" || pi install "npm:$p"
+done
+
+uid=$(id -u)
+for src in "$ai"/launchd/*.plist; do
+  label=$(basename "$src" .plist)
+  dst=~/Library/LaunchAgents/$label.plist
+  if ! cmp -s "$src" "$dst"; then
+    cp "$src" "$dst"
+    launchctl bootout "gui/$uid/$label" 2>/dev/null || true
+  fi
+  launchctl print "gui/$uid/$label" >/dev/null 2>&1 || launchctl bootstrap "gui/$uid" "$dst"
+done
+'''
