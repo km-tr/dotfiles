@@ -90,3 +90,72 @@ domain = "NSGlobalDomain"
 key = "com.apple.trackpad.threeFingerDragGesture"
 value = true
 host = "current"
+
+# Dock・キーボード・トラックパッド。Dock の変更は Dock を再起動するかログインし直すと反映される
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "autohide"
+value = true
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "tilesize"
+value = 90.0
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "show-recents"
+value = false
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "mru-spaces"
+value = false
+
+# 右下のホットコーナーでディスプレイをスリープ
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "wvous-br-corner"
+value = 10
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.dock"
+key = "wvous-br-modifier"
+value = 0
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "KeyRepeat"
+value = 2.0
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "InitialKeyRepeat"
+value = 15.0
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "NSAutomaticCapitalizationEnabled"
+value = false
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.trackpad.scaling"
+value = 3.0
+
+# タップでクリック
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.AppleMultitouchTrackpad"
+key = "Clicking"
+value = true
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+key = "Clicking"
+value = true
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.mouse.tapBehavior"
+value = 1
+host = "current"
