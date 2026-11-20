@@ -62,6 +62,23 @@ pi install ~/hoge/ai-config/pi
 ```
 
 Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する。
+
+外部の plugin と package は各ツールの設定ファイルにしか記録されないので、手で入れ直す。
+
+```sh
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail
+pi install npm:pi-web-access
+pi install npm:pi-background-tasks
+pi install npm:pi-subagents
+pi install npm:pi-sandbox
+pi install npm:@schultzp2020/pi-cursor
+pi install npm:@commandcode/pi-commandcode-provider
+pi install npm:@dietrichgebert/ponytail
+```
+
+claude.ai の組織から配布される plugin は、この一覧に含めない。
+
 ### 5. SSH 鍵と署名を設定する
 
 GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH エージェントを使い）、`~/.gitconfig.local` を作る。このファイルは chezmoi で管理しない。
