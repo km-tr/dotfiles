@@ -14,25 +14,19 @@
 
 始める前に App Store にサインインしておく。Brewfile の App Store アプリ（Bitwarden、Tailscale）を入れるのに使う。
 
-### 1. chezmoi で設定ファイルを配置する
+### 1. chezmoi を一度だけ実行する
 
-Homebrew がまだないので、公式スクリプトで取得した chezmoi を一度だけ実行する。`--purge-binary` で実行後にその本体を消し、常用する chezmoi は次の手順で Brewfile から入れる。リポジトリは public なので認証はいらない。
+Homebrew がまだないので、公式スクリプトで取得した chezmoi を一度だけ実行する。リポジトリは public なので認証はいらない。途中で管理者パスワードと gh のブラウザでのログインを聞かれる。
 
 ```sh
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply --purge-binary km-tr
 ```
 
-ソース（`~/.local/share/chezmoi`）と設定は残るので、以後は Homebrew の chezmoi で `chezmoi update` などを使える。
+chezmoi は設定ファイルを配置した後、`run_once_after_mise-bootstrap.sh` を実行する。このスクリプトは公式スクリプトで mise を入れて `mise bootstrap --skip-dirty` を実行し、終わったらその mise を消す。chezmoi と mise は Brewfile から入るので、`--purge-binary` と合わせて、公式スクリプトで入れた本体はどちらも残らない。
 
-### 2. mise bootstrap で残りをまとめて入れる
+途中で失敗したら、原因を直して `chezmoi apply` を実行し直す。Homebrew の mise がもう入っている場合はスクリプトが何もしないので、`mise bootstrap --skip-dirty` を手で実行する。
 
-mise も Brewfile から入れるので、公式スクリプトの mise で bootstrap を一度だけ実行し、終わったら消す。途中で管理者パスワードと gh のブラウザでのログインを聞かれる。
-
-```sh
-curl https://mise.run | sh
-~/.local/bin/mise bootstrap --skip-dirty
-rm ~/.local/bin/mise
-```
+### 2. mise bootstrap が行うこと
 
 `~/.config/mise/conf.d/bootstrap.toml` に従って、次を順に行う。何度実行しても、足りないものだけを入れる。
 
