@@ -57,7 +57,28 @@ npm の CLI のうち次の7つは mise の npm では入らないか動かな�
 
 ### 3. SSH 鍵と署名を設定する
 
-GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH エージェントを使い）、`~/.gitconfig.local` を作る。このファイルは chezmoi で管理しない。
+秘密鍵は Mac の間で運ばず、Mac ごとに新しく作って GitHub に登録する。鍵はパスフレーズ付きにし、パスフレーズはキーチェーンに保存するので、無人の作業（LaunchAgent の git pull や worker のコミット）でも聞かれない。Mac を手放すときは、その Mac の鍵だけを GitHub から外す。
+
+```sh
+ssh-keygen -t ed25519 -f ~/.ssh/github -C "$(scutil --get ComputerName)"
+ssh-add --apple-use-keychain ~/.ssh/github
+gh auth refresh -s admin:public_key,admin:ssh_signing_key
+gh ssh-key add ~/.ssh/github.pub --type authentication --title "$(scutil --get ComputerName)"
+gh ssh-key add ~/.ssh/github.pub --type signing --title "$(scutil --get ComputerName)"
+```
+
+GitHub では、同じ公開鍵でも認証用と署名用を別々に登録する。署名用の登録がないと、署名したコミットが GitHub で Verified にならない。
+
+`~/.ssh/config` に次を書く。このファイルは chezmoi で管理しない。
+
+```
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/github
+```
+
+`~/.gitconfig.local` を作る。このファイルも chezmoi で管理しない。
 
 ```ini
 [user]
@@ -69,6 +90,12 @@ GitHub 用の SSH 鍵を `~/.ssh/github` に置き（または Bitwarden の SSH
 ```
 
 このファイルがない間は、署名なしでコミットし、HTTPS（gh の認証）で push する。
+
+確認する。
+
+```sh
+ssh -T git@github.com            # "successfully authenticated" と出る
+```
 
 ### 4. 確認する
 
