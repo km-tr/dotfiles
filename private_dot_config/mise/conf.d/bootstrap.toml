@@ -72,3 +72,21 @@ for src in "$ai"/launchd/*.plist; do
   launchctl print "gui/$uid/$label" >/dev/null 2>&1 || launchctl bootstrap "gui/$uid" "$dst"
 done
 '''
+
+# 新しい Mac でも必ず変える macOS の設定だけを書く。気づいたら足す
+# 3 本指のドラッグ（システム設定のアクセシビリティ > ポインタコントロール）
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.AppleMultitouchTrackpad"
+key = "TrackpadThreeFingerDrag"
+value = true
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "com.apple.driver.AppleBluetoothMultitouch.trackpad"
+key = "TrackpadThreeFingerDrag"
+value = true
+
+[[bootstrap.settings.macos.defaults_entries]]
+domain = "NSGlobalDomain"
+key = "com.apple.trackpad.threeFingerDragGesture"
+value = true
+host = "current"
