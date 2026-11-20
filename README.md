@@ -44,15 +44,14 @@ chezmoi は設定ファイルを配置した後、`run_once_after_mise-bootstrap
 bootstrap の後に手で行うこと:
 
 - Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する
-- `reason` と `ara` は Reason アプリが置くリンクなので、アプリを入れて揃える
 - claude.ai の組織から配布される plugin は、claude.ai へのログインで入る
 
-npm の CLI のうち次の8つは mise の npm では入らないか動かないので、bun で入れている。
+npm の CLI のうち次の7つは mise の npm では入らないか動かないので、bun で入れている。
 
 | 理由 | パッケージ |
 |---|---|
 | 自動更新の LaunchAgent（`codex-update`）が bun で更新する | codex |
-| mise の npm はインストール後のスクリプトを実行せず、動かない（または遅くなる） | reason, opencode-ai, agent-desktop |
+| mise の npm はインストール後のスクリプトを実行せず、動かない（または遅くなる） | opencode-ai, agent-desktop |
 | 週のダウンロード数が少なく、mise の npm が安全確認で拒否する | ncli, figma-reader |
 | mise の npm で依存関係を解決できない | lighthouse, vercel |
 
