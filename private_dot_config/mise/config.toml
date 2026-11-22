@@ -18,6 +18,7 @@ pnpm = "11.28.8"
 "aqua:anthropics/claude-code" = "2.1.330"
 "aqua:earendil-works/pi" = "1.6.0"
 "github:getsentry/toolkit" = { version = "0.50.0", version_prefix = "cli@", asset_pattern = 'sentry-{{ os(macos="darwin") }}-{{ arch() }}{{ os(windows=".exe", macos="", linux="") }}', bin = "sentry" }
+grok = "1.0.77"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

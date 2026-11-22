@@ -35,7 +35,6 @@ run = '''
 set -eu
 ai=~/hoge/ai-config
 
-[ -x ~/.grok/bin/grok ] || curl -fsSL https://x.ai/cli/install.sh | bash
 [ -x ~/.local/bin/blacksmith ] || curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh
 export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
 
