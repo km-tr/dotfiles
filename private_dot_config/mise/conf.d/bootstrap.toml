@@ -35,10 +35,7 @@ run = '''
 set -eu
 ai=~/hoge/ai-config
 
-[ -x ~/.local/bin/cursor-agent ] || curl https://cursor.com/install -fsS | bash
-[ -x ~/.local/bin/devin ] || curl -fsSL https://cli.devin.ai/install.sh | bash
 [ -x ~/.grok/bin/grok ] || curl -fsSL https://x.ai/cli/install.sh | bash
-[ -x ~/.local/bin/coderabbit ] || curl -fsSL https://cli.coderabbit.ai/install.sh | sh
 [ -x ~/.local/bin/blacksmith ] || curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh
 export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
 
