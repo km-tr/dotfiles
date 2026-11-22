@@ -35,7 +35,6 @@ chezmoi は設定ファイルを配置した後、`run_once_after_mise-bootstrap
 3. `config.toml` に従って、開発ツールと Codex・Claude Code・Pi・Sentry・Grok のネイティブ版を mise で入れる
 4. `bootstrap` タスクで、次を入れる
    - 公式インストーラーで Blacksmith CLI を入れる
-   - bun で入れる npm の CLI（下の表）
    - Claude Code・Codex・Pi の自作 hooks（ai-config の plugin と package）と、外部の plugin・package（ponytail など）
    - ai-config の `launchd/` にある自作の LaunchAgent。旧 Bun 版を更新する `codex-update` は停止する
 
@@ -46,13 +45,7 @@ bootstrap の後に手で行うこと:
 - Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する
 - claude.ai の組織から配布される plugin は、claude.ai へのログインで入る
 
-npm の CLI のうち次の4つは mise の npm では入らないか動かないので、bun で入れている。
-
-| 理由 | パッケージ |
-|---|---|
-| mise の npm はインストール後のスクリプトを実行せず、動かない（または遅くなる） | agent-desktop |
-| 週のダウンロード数が少なく、mise の npm が安全確認で拒否する | ncli, figma-reader |
-| mise の npm で依存関係を解決できない | lighthouse |
+mise では、agent-desktop のインストールスクリプトと、ncli・figma-reader のダウンロード数チェックの例外を、対象のパッケージごとに設定している。
 
 ### 3. SSH 鍵と署名を設定する
 

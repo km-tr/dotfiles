@@ -38,11 +38,6 @@ ai=~/hoge/ai-config
 [ -x ~/.local/bin/blacksmith ] || curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh
 export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
 
-# mise の npm では入らない、または動かないもの（理由は dotfiles の README）
-for p in @sakasegawa/ncli agent-desktop figma-reader lighthouse; do
-  bun pm ls -g 2>/dev/null | grep -q " $p@" || bun add -g "$p"
-done
-
 claude plugin marketplace list | grep -q "Folder ($ai)" || claude plugin marketplace add "$ai"
 claude plugin list | grep -q 'kmtr-hooks@ai-config' || claude plugin install kmtr-hooks@ai-config
 claude plugin marketplace list | grep -q 'DietrichGebert/ponytail' || claude plugin marketplace add DietrichGebert/ponytail
