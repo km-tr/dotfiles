@@ -40,7 +40,7 @@ ai=~/hoge/ai-config
 export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
 
 # mise の npm では入らない、または動かないもの（理由は dotfiles の README）
-for p in @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel; do
+for p in @sakasegawa/ncli agent-desktop figma-reader lighthouse; do
   bun pm ls -g 2>/dev/null | grep -q " $p@" || bun add -g "$p"
 done
 
