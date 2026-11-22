@@ -32,12 +32,12 @@ chezmoi は設定ファイルを配置した後、`run_once_after_mise-bootstrap
 
 1. Homebrew を入れ、Brewfile のうち入っていないものを入れる（既存のパッケージは更新しない）。gh にログインする
 2. `~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る
-3. `config.toml` の開発ツールと npm の CLI を入れる
+3. `config.toml` に従って、開発ツールと Codex・Claude Code・Pi・Sentry のネイティブ版を mise で入れる
 4. `bootstrap` タスクで、次を入れる
-   - 公式のインストーラーで入れる CLI（claude、cursor-agent、devin、grok、coderabbit、blacksmith）
+   - 公式のインストーラーで入れる CLI（cursor-agent、devin、grok、coderabbit、blacksmith）
    - bun で入れる npm の CLI（下の表）
    - Claude Code・Codex・Pi の自作 hooks（ai-config の plugin と package）と、外部の plugin・package（ponytail など）
-   - ai-config の `launchd/` にある自作の LaunchAgent
+   - ai-config の `launchd/` にある自作の LaunchAgent。旧 Bun 版を更新する `codex-update` は停止する
 
 `--skip-dirty` は、未コミットの変更があるリポジトリで止まらずにスキップするための指定。
 
@@ -46,11 +46,10 @@ bootstrap の後に手で行うこと:
 - Codex の hooks は承認するまで動かないので、`codex` を起動して `/hooks` で kmtr-codex-hooks の hook を承認する
 - claude.ai の組織から配布される plugin は、claude.ai へのログインで入る
 
-npm の CLI のうち次の7つは mise の npm では入らないか動かないので、bun で入れている。
+npm の CLI のうち次の6つは mise の npm では入らないか動かないので、bun で入れている。
 
 | 理由 | パッケージ |
 |---|---|
-| 自動更新の LaunchAgent（`codex-update`）が bun で更新する | codex |
 | mise の npm はインストール後のスクリプトを実行せず、動かない（または遅くなる） | opencode-ai, agent-desktop |
 | 週のダウンロード数が少なく、mise の npm が安全確認で拒否する | ncli, figma-reader |
 | mise の npm で依存関係を解決できない | lighthouse, vercel |

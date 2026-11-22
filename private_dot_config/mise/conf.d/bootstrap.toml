@@ -35,16 +35,15 @@ run = '''
 set -eu
 ai=~/hoge/ai-config
 
-[ -x ~/.local/bin/claude ] || curl -fsSL https://claude.ai/install.sh | bash
 [ -x ~/.local/bin/cursor-agent ] || curl https://cursor.com/install -fsS | bash
 [ -x ~/.local/bin/devin ] || curl -fsSL https://cli.devin.ai/install.sh | bash
 [ -x ~/.grok/bin/grok ] || curl -fsSL https://x.ai/cli/install.sh | bash
 [ -x ~/.local/bin/coderabbit ] || curl -fsSL https://cli.coderabbit.ai/install.sh | sh
 [ -x ~/.local/bin/blacksmith ] || curl -fsSL https://get.blacksmith.sh | BLACKSMITH_INSTALL_DIR="$HOME/.local/bin" sh
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
 
 # mise の npm では入らない、または動かないもの（理由は dotfiles の README）
-for p in @openai/codex @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel; do
+for p in @sakasegawa/ncli agent-desktop figma-reader lighthouse opencode-ai vercel; do
   bun pm ls -g 2>/dev/null | grep -q " $p@" || bun add -g "$p"
 done
 
@@ -62,8 +61,11 @@ for p in pi-web-access pi-background-tasks pi-subagents pi-sandbox @schultzp2020
 done
 
 uid=$(id -u)
+launchctl disable "gui/$uid/com.kmtr.codex-update"
+launchctl bootout "gui/$uid/com.kmtr.codex-update" 2>/dev/null || true
 for src in "$ai"/launchd/*.plist; do
   label=$(basename "$src" .plist)
+  [ "$label" != com.kmtr.codex-update ] || continue
   dst=~/Library/LaunchAgents/$label.plist
   if ! cmp -s "$src" "$dst"; then
     cp "$src" "$dst"
