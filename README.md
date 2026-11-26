@@ -33,6 +33,7 @@ chezmoi は設定ファイルを配置した後、`run_once_after_mise-bootstrap
 1. Homebrew を入れ、Brewfile のうち入っていないものを入れる（既存のパッケージは更新しない）。gh にログインする
 2. `~/hoge/ai-config` と `~/docs` を clone し、`~/.claude/CLAUDE.md` や `~/.agents/skills` などの symlink を張る
    - 業務のリポジトリは、private の ai-config にある `.agents/mise/work-repos.toml` に書いてある。`bootstrap` タスクが repos をもう一度実行して clone する
+   - Claude・Codex・Pi の設定のうち、ai-config の `.agents/settings/` に書いたキー（権限、好み、モデル）を各設定ファイルに合流させる。ほかのキー、認証、Mac ごとの記録には触れない
 3. `config.toml` に従って、開発ツールと Codex・Claude Code・Pi・Sentry・Grok のネイティブ版を mise で入れる
 4. `bootstrap` タスクで、次を入れる
    - 公式インストーラーで Blacksmith CLI を入れる

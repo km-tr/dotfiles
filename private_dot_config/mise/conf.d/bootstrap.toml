@@ -15,6 +15,12 @@ url = "https://github.com/km-tr/docs.git"
 "~/.agents/hooks" = { source = "~/hoge/ai-config/.agents/hooks", mode = "symlink" }
 "~/.claude/skills" = { source = "~/.agents/skills", mode = "symlink" }
 "~/.codex/agents" = { source = "~/hoge/ai-config/.codex/agents", mode = "symlink-each" }
+# 各エージェントの設定は、自分で決めたキーだけを合流させる。ツールや Orca が書くキー、Mac ごとの記録や認証には触れない
+# 配列は合流せず丸ごと置き換わるので、permissions などの一覧は ai-config 側を正とする
+"~/.claude/settings.json/ai-config" = { source = "~/hoge/ai-config/.agents/settings/claude-settings.json", merge = true }
+"~/.codex/config.toml/ai-config" = { source = "~/hoge/ai-config/.agents/settings/codex-config.toml", merge = true }
+"~/.pi/agent/settings.json/ai-config" = { source = "~/hoge/ai-config/.agents/settings/pi-settings.json", merge = true }
+"~/.config/ccstatusline/settings.json" = { source = "~/hoge/ai-config/.agents/settings/ccstatusline.json", mode = "symlink" }
 
 # repos の clone より前に Homebrew・gh を揃え、private の docs を gh の認証で clone できるようにする
 [bootstrap.hooks.pre-repos]
