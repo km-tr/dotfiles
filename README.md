@@ -105,8 +105,24 @@ ls -l ~/.claude/CLAUDE.md       # ai-config への symlink
 | やりたいこと | コマンド |
 |---|---|
 | ローカルで編集した設定を反映する | `chezmoi apply` |
-| 別の Mac での変更を取り込む | `chezmoi update` |
+| 別の Mac で変えた dotfiles を取り込む | `chezmoi update` の後に `mise bootstrap --skip-dirty`（下の「Mac の間の同期」） |
 | アプリや CLI を入れた・消した後に Brewfile へ反映する | `bbd` の後に `chezmoi re-add ~/.Brewfile` してコミット |
 | mise のツールを更新して dotfiles へ反映する | `mup`（更新、`chezmoi re-add`、push まで。APM は 0.34.0 のまま） |
 | Brewfile の内容をまとめて入れる | `brew bundle --global` |
 | Brewfile の不足、ai-config と docs、symlink、plugin、LaunchAgent をまとめて揃える | `mise bootstrap --skip-dirty` |
+| ai-config・docs と業務のリポジトリを最新にする | `mise bootstrap repos update --skip-dirty` |
+
+### Mac の間の同期
+
+別の Mac で push した変更は、自動では入らない。使う Mac で次を順に実行する。
+
+```sh
+chezmoi update                              # dotfiles を pull してホームに反映する
+mise bootstrap repos update --skip-dirty    # ai-config・docs・業務のリポジトリを fast-forward する
+mise bootstrap --skip-dirty                 # 反映された設定に合わせて、足りないものを入れる
+```
+
+- `chezmoi update` は、手元で直接書き換えたファイル（`mise upgrade --bump` の後の `config.toml` など）があると、上書きする前に確認を聞く。手元の変更を残したいときは、先に `chezmoi re-add` してコミットする
+- `mise bootstrap` は、ないリポジトリを clone するだけで、すでにあるものは pull しない。最新にするのは `repos update` の役目
+- 未コミットの変更があるリポジトリは、`--skip-dirty` で飛ばされる
+- Claude Code と Pi の自作 hooks は、ai-config を pull すれば次の起動から反映される。Codex は登録（`codex/hooks/hooks.json`）を変えたときだけ、`codex plugin add kmtr-codex-hooks@ai-config` をやり直し、`/hooks` で承認し直す
