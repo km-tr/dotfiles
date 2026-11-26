@@ -1,4 +1,3 @@
-tap "708u/tap"
 tap "appandflow/tap"
 tap "km-tr/tap"
 tap "olets/tap"
@@ -149,7 +148,6 @@ cask "appandflow/tap/stim", trusted: true
 # Text editor for code, markup and prose
 cask "sublime-text"
 # Simplify git worktree workflows with automatic branch creation, symlinks, and change syncing
-cask "708u/tap/twig", trusted: true
 # OpenJDK distribution from Azul
 cask "zulu@17"
 mas "Bitwarden", id: 1352778147
