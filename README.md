@@ -105,7 +105,7 @@ ls -l ~/.claude/CLAUDE.md       # ai-config への symlink
 | やりたいこと | コマンド |
 |---|---|
 | ローカルで編集した設定を反映する | `chezmoi apply` |
-| 別の Mac で変えた dotfiles を取り込む | `chezmoi update` の後に `mise bootstrap --skip-dirty`（下の「Mac の間の同期」） |
+| 別の Mac での変更を取り込む | `msync`（下の「Mac の間の同期」） |
 | アプリや CLI を入れた・消した後に Brewfile へ反映する | `bbd` の後に `chezmoi re-add ~/.Brewfile` してコミット |
 | mise のツールを更新して dotfiles へ反映する | `mup`（更新、`chezmoi re-add`、push まで。APM は 0.34.0 のまま） |
 | Brewfile の内容をまとめて入れる | `brew bundle --global` |
@@ -114,7 +114,7 @@ ls -l ~/.claude/CLAUDE.md       # ai-config への symlink
 
 ### Mac の間の同期
 
-別の Mac で push した変更は、自動では入らない。使う Mac で次を順に実行する。
+ai-config・docs・業務のリポジトリは、LaunchAgent（`com.kmtr.repos-update`）が1時間ごとに fast-forward する。dotfiles と、それに合わせた導入は自動では入らないので、使う Mac で `msync` を実行する。中身は次の3つ。
 
 ```sh
 chezmoi update                              # dotfiles を pull してホームに反映する

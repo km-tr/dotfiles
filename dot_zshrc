@@ -72,6 +72,7 @@ alias brwe="brew"
 alias bbd="brew bundle dump --global --force --tap --formula --cask --mas --cargo --uv --go"
 # APM は登録済みスキルを消す不具合のある 0.35 系を避けるため固定している
 alias mup="mise upgrade --global --bump --no-prune --exclude 'github:microsoft/apm' && chezmoi re-add ~/.config/mise/config.toml && chezmoi git push"
+alias msync="chezmoi update && mise bootstrap repos update --skip-dirty && mise bootstrap --skip-dirty"
 
 [[ -d /Applications/Tailscale.app ]] && alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
