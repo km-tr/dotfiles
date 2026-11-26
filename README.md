@@ -109,6 +109,7 @@ ls -l ~/.claude/CLAUDE.md       # ai-config への symlink
 | 別の Mac での変更を取り込む | `msync`（下の「Mac の間の同期」） |
 | アプリや CLI を入れた・消した後に Brewfile へ反映する | `bbd` の後に `chezmoi re-add ~/.Brewfile` してコミット |
 | mise のツールを更新して dotfiles へ反映する | `mup`（更新、`chezmoi re-add`、push まで。APM は 0.34.0 のまま） |
+| Claude・Codex・Pi の設定を各 Mac で変えた値を ai-config に戻す | `settings-capture`（ai-config の `.agents/settings/` にあるキーだけを書き戻し、差分を見せて止まる。コミットと push は手で行う） |
 | ai-config の APM のスキルを更新する | `apmup`（`apm update`、スキルが消えていないかの確認、APM のファイルだけのコミット、push まで） |
 | Brewfile の内容をまとめて入れる | `brew bundle --global` |
 | Brewfile の不足、ai-config と docs、symlink、plugin、LaunchAgent をまとめて揃える | `mise bootstrap --skip-dirty` |
