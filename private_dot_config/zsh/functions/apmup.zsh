@@ -15,19 +15,12 @@ apmup() {
       return 1
     fi
 
-    # 新旧の lock に載っているファイルだけを対象にし、手元のローカルスキルの変更を混ぜない
+    # 新旧の lock に載っているスキル・agent のフォルダだけを対象にし、手元のローカルスキルの変更を混ぜない
+    # lock の長いパスは YAML で折り返されるので、ファイル名ではなく先頭のフォルダ名だけを使う
     local -a paths
-    paths=("${(@f)$(python3 -I -c '
-import re, subprocess, sys, os
-def deployed(text):
-    return set(re.findall(r"^\s*value: (\.agents/\S+|\.codex/\S+)$", text, re.M))
-old = subprocess.run(["git", "show", "HEAD:apm.lock.yaml"], capture_output=True, text=True).stdout
-new = open("apm.lock.yaml").read()
-tracked = set(subprocess.run(["git", "ls-files"], capture_output=True, text=True).stdout.split())
-for p in sorted(deployed(old) | deployed(new)):
-    if os.path.isfile(p) or p in tracked:
-        print(p)
-')}")
+    paths=("${(@f)$( { git show HEAD:apm.lock.yaml; cat apm.lock.yaml; } \
+      | sed -nE 's#^[[:space:]]*value: [\x27"]?(\.agents/skills/[^/[:space:]]+|\.codex/agents/[^/[:space:]]+).*#\1#p' \
+      | sort -u)}")
     git add -A -- apm.lock.yaml "${paths[@]}"
     if git diff --cached --quiet; then
       print "apmup: 変更なし"
