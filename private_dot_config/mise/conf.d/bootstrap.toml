@@ -8,6 +8,8 @@ url = "https://github.com/km-tr/docs.git"
 "~/.claude/CLAUDE.md" = { source = "~/hoge/ai-config/.agents/global-instructions.md", mode = "symlink" }
 "~/.codex/AGENTS.md" = { source = "~/hoge/ai-config/.agents/global-instructions.md", mode = "symlink" }
 "~/.pi/agent/AGENTS.md" = { source = "~/hoge/ai-config/.agents/global-instructions.md", mode = "symlink" }
+# 業務リポジトリの URL は public のこのリポジトリに書かず、private の ai-config に置く
+"~/.config/mise/conf.d/work-repos.toml" = { source = "~/hoge/ai-config/.agents/mise/work-repos.toml", mode = "symlink" }
 "~/.agents/bin" = { source = "~/hoge/ai-config/.agents/bin", mode = "symlink" }
 "~/.agents/skills" = { source = "~/hoge/ai-config/.agents/skills", mode = "symlink" }
 "~/.agents/hooks" = { source = "~/hoge/ai-config/.agents/hooks", mode = "symlink" }
@@ -50,6 +52,9 @@ pi list | grep -q "$ai/pi" || pi install "$ai/pi"
 for p in pi-web-access pi-background-tasks pi-subagents pi-sandbox @schultzp2020/pi-cursor @commandcode/pi-commandcode-provider @dietrichgebert/ponytail; do
   pi list | grep -q "npm:$p\$" || pi install "npm:$p"
 done
+
+# work-repos.toml は同じ実行の dotfiles で置かれるので、読み直すために repos だけもう一度実行する
+mise bootstrap --only repos --skip-dirty
 
 uid=$(id -u)
 launchctl disable "gui/$uid/com.kmtr.codex-update"
